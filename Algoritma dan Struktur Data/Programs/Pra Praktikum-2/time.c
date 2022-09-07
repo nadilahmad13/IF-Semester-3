@@ -2,6 +2,7 @@
 // Ahmad Nadil
 // 13521024
 // Pra Praktikum 2 Algoritma dan Struktur Data
+// 7 September 2022
 
 #include <stdio.h>
 #include "time.h"
@@ -84,16 +85,37 @@ TIME NextNDetik (TIME T, int N)
 }
 
 TIME PrevDetik(TIME T)
-{
-    return DetikToTIME(TIMEToDetik(T)-1);
+{   
+    int detik;
+    detik = TIMEToDetik(T);
+    if (detik-1 < 0) {
+        detik = 86400;
+    }
+    detik -= 1;
+    return DetikToTIME(detik);
 }
 
 TIME PrevNDetik (TIME T, int N)
-{
-    return DetikToTIME(TIMEToDetik(T)-N);
+{   
+    int detik;
+    detik = TIMEToDetik(T);
+    if (detik-N < 0){
+        detik += 86400;
+    }
+    detik -= N;
+    return DetikToTIME(detik);
 }
 
 long Durasi (TIME TAw, TIME TAkh)
 {
-    return (TIMEToDetik(TAkh)-TIMEToDetik(TAw));
+    int SAw, SAkh, Diff;
+    SAw = TIMEToDetik(TAw);
+    SAkh = TIMEToDetik(TAkh);
+    Diff  = SAkh - SAw;
+    if (SAw > SAkh){
+        return Diff + 86400;
+    }
+    else{
+        return Diff;
+    }
 }

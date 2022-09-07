@@ -64,13 +64,13 @@ int main()
             arr[9]++;
         }
     }
-    // output in string type
-    char output[10];
+
     for (i = 0; i < 10; i++)
     {
-        output[i] = arr[i] + '0';
+        printf("%d", arr[i]);
     }
 
-    // final output
-    printf("%s\n", output);
+    printf("\n");
+
+    return 0;
 }
