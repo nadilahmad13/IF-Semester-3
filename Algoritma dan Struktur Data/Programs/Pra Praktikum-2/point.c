@@ -3,11 +3,13 @@
 // 13521024
 // Pra Praktikum 2 Algoritma dan Struktur Data
 // 7 September 2022
-
 #include <stdio.h>
 #include "point.h"
 #include <math.h>
 
+// #ifndef M_PI
+// #define M_PI 3.14159265358979323846264338327950288
+// #endif
 
 void CreatePoint (POINT * P, float X, float Y)
 {
