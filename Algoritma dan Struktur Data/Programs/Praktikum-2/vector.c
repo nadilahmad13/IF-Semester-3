@@ -19,9 +19,7 @@ void TulisVector(VECTOR v)
 
 float Magnitude (VECTOR v)
 {
-    float ans;
-    ans =  sqrt(pow(AbsisComponent(v),2) + pow(OrdinatComponent(v),2));
-    return ans;
+    return sqrt(pow(AbsisComponent(v),2) + pow(OrdinatComponent(v),2));
 }
 
 VECTOR Add (VECTOR a, VECTOR b)
@@ -43,7 +41,7 @@ VECTOR Substract (VECTOR a, VECTOR b)
 float Dot(VECTOR a, VECTOR b)
 {
     float ans;
-    ans = (AbsisComponent(a) * AbsisComponent(b)) + (OrdinatComponent(a) + OrdinatComponent(b));
+    ans = AbsisComponent(a) * AbsisComponent(b) + OrdinatComponent(a) + OrdinatComponent(b);
     return ans;
 }
 

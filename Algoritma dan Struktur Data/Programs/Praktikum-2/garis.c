@@ -14,45 +14,40 @@ void CreateGaris (GARIS * L, POINT P1, POINT P2)
 
 void BacaGARIS(GARIS * L)
 {
-    POINT P1, P2;
-    BacaPOINT(&P1);
-    BacaPOINT(&P2);
-    while(EQ(P1,P2))
+    BacaPOINT(&PAwal(*L));
+    BacaPOINT(&PAkhir(*L));
+    while(EQ(PAwal(*L),PAkhir(*L)))
     {
         printf("Garis tidak valid\n");
-        BacaPOINT(&P1);
-        BacaPOINT(&P2);
+        BacaPOINT(&PAwal(*L));
+        BacaPOINT(&PAkhir(*L));
     }
-    CreateGaris(L,P1,P2);
+    CreateGaris(L,PAwal(*L),PAkhir(*L));
 }
 
 void TulisGARIS(GARIS L)
 {
-    printf("((%.2f,%.2f),(%.2f,%.2f))",Absis(PAwal(L)),Ordinat(PAwal(L)),Absis(PAkhir(L)),Ordinat(PAkhir(L)));
+    printf("("); TulisPOINT(PAwal(L)); printf(","); TulisPOINT(PAkhir(L)); printf(")");
 }
 
 float PanjangGARIS (GARIS L)
 {
-    return sqrt((Absis(PAwal(L)) - Absis(PAkhir(L))) * (Absis(PAwal(L)) - Absis(PAkhir(L))) + (Ordinat(PAwal(L)) - Ordinat(PAkhir(L))) * (Ordinat(PAwal(L)) - Ordinat(PAkhir(L))));
+   return sqrt(pow(Absis(PAkhir(L))-Absis(PAwal(L)),2) + pow(Ordinat(PAkhir(L)) - Ordinat(PAwal(L)),2));
 }
 
 float Gradien (GARIS L)
 {   
-    float grad;
     if (Absis(PAwal(L)) == Absis(PAkhir(L))){
         return 0;
     }
 
-    grad = (Ordinat(PAkhir(L)) - Ordinat(PAwal(L))) / (Absis(PAkhir(L)) - Ordinat(PAkhir(L)));
-    return grad;
+    return (Ordinat(PAkhir(L)) - Ordinat(PAwal(L))) / (Absis(PAkhir(L)) - Ordinat(PAkhir(L)));
 }
 
 void GeserGARIS (GARIS * L, float deltaX, float deltaY)
 {
-    Absis(PAwal(*L)) += deltaX;
-    Absis(PAkhir(*L)) += deltaX;
-    Ordinat(PAwal(*L)) += deltaY;
-    Ordinat(PAkhir(*L)) += deltaY;
+    Geser(&PAwal(*L), deltaX, deltaY);
+    Geser(&PAkhir(*L), deltaX, deltaY);
 }
 
 boolean IsTegakLurus (GARIS L1, GARIS L2)
