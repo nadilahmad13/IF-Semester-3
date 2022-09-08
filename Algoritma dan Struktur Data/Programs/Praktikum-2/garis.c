@@ -1,6 +1,6 @@
 // Ahmad Nadil
 // 13521024
-// File vector.c
+// File garis.c
 
 #include <stdio.h>
 #include <math.h>
