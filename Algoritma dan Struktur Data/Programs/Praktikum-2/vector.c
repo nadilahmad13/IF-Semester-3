@@ -14,12 +14,12 @@ void CreateVector(VECTOR *v, float x, float y)
 
 void TulisVector(VECTOR v)
 {
-    printf("<.%2f,.%2f>",AbsisComponent(v),OrdinatComponent(v));
+    printf("<%.2f,%.2f>", AbsisComponent(v), OrdinatComponent(v));
 }
 
 float Magnitude (VECTOR v)
 {
-    return sqrt(pow(AbsisComponent(v),2) + pow(OrdinatComponent(v),2));
+    return(sqrt(AbsisComponent(v)*AbsisComponent(v) + OrdinatComponent(v)*OrdinatComponent(v)));
 }
 
 VECTOR Add (VECTOR a, VECTOR b)
@@ -27,6 +27,7 @@ VECTOR Add (VECTOR a, VECTOR b)
     VECTOR v;
     AbsisComponent(v) = AbsisComponent(a) + AbsisComponent(b);
     OrdinatComponent(v) = OrdinatComponent(a) + OrdinatComponent(b);
+    CreateVector(&v, AbsisComponent(v), OrdinatComponent(v));
     return v;
 }
 
@@ -35,14 +36,13 @@ VECTOR Substract (VECTOR a, VECTOR b)
     VECTOR v;
     AbsisComponent(v) = AbsisComponent(a) - AbsisComponent(b);
     OrdinatComponent(v) = OrdinatComponent(a) - OrdinatComponent(b);
+    CreateVector(&v, AbsisComponent(v), OrdinatComponent(v));
     return v;
 }
 
 float Dot(VECTOR a, VECTOR b)
 {
-    float ans;
-    ans = AbsisComponent(a) * AbsisComponent(b) + OrdinatComponent(a) + OrdinatComponent(b);
-    return ans;
+    return (AbsisComponent(a) * AbsisComponent(b) + OrdinatComponent(a) * OrdinatComponent(b));
 }
 
 VECTOR Multiply(VECTOR v, float s)
@@ -50,5 +50,6 @@ VECTOR Multiply(VECTOR v, float s)
     VECTOR a;
     AbsisComponent(a) = s * AbsisComponent(v);
     OrdinatComponent(a) = s * OrdinatComponent(v);
+    CreateVector(&a, AbsisComponent(a), OrdinatComponent(a));
     return a;
 }

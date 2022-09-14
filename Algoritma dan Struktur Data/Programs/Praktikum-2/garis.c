@@ -27,21 +27,26 @@ void BacaGARIS(GARIS * L)
 
 void TulisGARIS(GARIS L)
 {
-    printf("("); TulisPOINT(PAwal(L)); printf(","); TulisPOINT(PAkhir(L)); printf(")");
+    printf("(");
+    TulisPOINT(PAwal(L));
+    printf(",");
+    TulisPOINT(PAkhir(L));
+    printf(")");
 }
 
 float PanjangGARIS (GARIS L)
 {
-   return sqrt(pow(Absis(PAkhir(L))-Absis(PAwal(L)),2) + pow(Ordinat(PAkhir(L)) - Ordinat(PAwal(L)),2));
+    float x1, y1, x2, y2;
+    x1 = Absis(PAwal(L));
+    y1 = Ordinat(PAwal(L));
+    x2 = Absis(PAkhir(L));
+    y2 = Ordinat(PAkhir(L));
+    return(sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1)));
 }
 
 float Gradien (GARIS L)
 {   
-    if (Absis(PAwal(L)) == Absis(PAkhir(L))){
-        return 0;
-    }
-
-    return (Ordinat(PAkhir(L)) - Ordinat(PAwal(L))) / (Absis(PAkhir(L)) - Ordinat(PAkhir(L)));
+    return ((Ordinat(PAkhir(L))-Ordinat(PAwal(L)))/(Absis(PAkhir(L))-Absis(PAwal(L))));
 }
 
 void GeserGARIS (GARIS * L, float deltaX, float deltaY)

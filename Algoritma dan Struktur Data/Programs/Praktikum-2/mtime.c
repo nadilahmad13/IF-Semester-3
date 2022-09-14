@@ -3,7 +3,7 @@
 // File "mtime.c"
 
 #include <stdio.h>
-#include "time.c"
+#include "time.h"
 
 int main(){
     int N,i;
