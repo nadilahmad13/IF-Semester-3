@@ -10,22 +10,16 @@
 
 int main()
 {
-    // Input List
+    //Read List
     ListStatik l;
     readList(&l);
 
-    // Input x
-    int x;
+    //2. X Occurence
+    int x,xocc = 0;
     scanf("%d",&x);
-
-    // 2. X Occurence
-    int i,xocc;
-
-    // 3. Get Last Index
-    int ldx;
+    int i;
     for (i = 0 ; i < listLength(l) ; i++){
         if (x == ELMT(l,i)){
-            ldx = i;
             xocc++;
         }
     }
@@ -34,21 +28,26 @@ int main()
     printList(l);
     printf("\n");
 
-    printf("%d\n",xocc); //X Occurence
+    printf("%d\n",xocc);
 
-    // Last Index
+    //3. Get Last Index where X is Found
+    int ldx;
     if (indexOf(l,x) != IDX_UNDEF){
+        for (i = 0 ; i < listLength(l) ; i++){
+            if (x == ELMT(l,i)){
+                ldx = i;
+            }
+        }
         printf("%d\n",ldx);
     }
     else{
         printf("%d tidak ada\n",x);
     }
-    
 
-    // 4. Extreme Values
+    //4. X Extreme Values
     int min,max;
     extremeValues(l,&max,&min);
-    
+
     if (x == max){
         printf("maksimum\n");
     }
@@ -57,23 +56,12 @@ int main()
         printf("minimum\n");
     }
 
-    // 5. Median
+    // 5. Get the median of List
     sortList(&l,true);
-
-    int len = listLength(l)-2;
-
-
-    if (listLength(l) % 2 == 0){ //GENAP
-        if (x == ELMT(l,(len / 2))){
-            printf("median\n");
-        }
+    int med = ELMT(l,getLastIdx(l)/2);
+    if (x == med){
+        printf("median\n");
     }
 
-    if (listLength(l) % 2 != 0){ // GANJIL
-        if (x == ELMT(l,(len/2 + 1))){
-            printf("median\n");
-        }
-    }
-
-    return 0;   
+    return 0;
 }

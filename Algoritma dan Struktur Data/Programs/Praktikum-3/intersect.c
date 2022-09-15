@@ -37,22 +37,6 @@ int main(){
         printf("%d\n",occ);
         printList(l3);
         printf("\n");
-        // // print name
-        // printf("[");
-        // for (i = 0 ; i < listLength(l1) ; i++){
-        //     for (j = 0 ; j < listLength(l2) ; j++){
-        //         if (ELMT(l1,i) == ELMT(l2,j)){
-        //             nim = ELMT(l1,i);
-        //             printf("%d",nim);
-        //             temp++;
-        //             if(temp != occ){
-        //                 printf(",");
-        //             }
-        //         }
-        //     }
-        // }
-        // printf("]\n");
     }
-
     return 0;
 }

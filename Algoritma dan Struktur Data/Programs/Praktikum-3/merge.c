@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "listdin.c"
+#include "listdin.h"
 
 int main(){
     ListDin l1,l2,l3;
@@ -20,39 +20,24 @@ int main(){
     sort(&l1,true);
     sort(&l2,true);
 
-    if (isEmpty(l1)){
-        int len = listLength(l2);
-        printf("%d\n",len);
-        printList(l2);
-    }
-
-    else if (isEmpty(l2)){
-        int len = listLength(l1);
-        printf("%d\n",len);
-        printList(l1);
-    }
-    else if (isListEqual(l1,l2)){
-        int len = listLength(l2);
-        printList(l2);
-    }
-
-    else{
+    // merge l1 and l2 to l3 without duplicate
     int i,j;
-    boolean flag;
     for (i = 0 ; i < listLength(l1) ; i++){
-        flag = true;
-        for (j = 0 ; j < listLength(l2) ; j++){
-            if(ELMT(l1,i) == ELMT(l2,j)){
-                flag = false;
-                }
-            if (j == listLength(l2)-1 && flag){
-                insertLast(&l3,ELMT(l1,i));
-                }
-            } 
+        if (indexOf(l3,ELMT(l1,i)) == IDX_UNDEF){
+            insertLast(&l3,ELMT(l1,i));
         }
-        printList(l3);
     }
 
+    for (i = 0 ; i < listLength(l2) ; i++){
+        if (indexOf(l3,ELMT(l2,i)) == IDX_UNDEF){
+            insertLast(&l3,ELMT(l2,i));
+        }
+    }
+
+    sort(&l3,true);
+    int len = listLength(l3);
+    printf("%d\n",len);
+    printList(l3);
     printf("\n");
 
     return 0;
