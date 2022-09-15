@@ -148,7 +148,7 @@ void deleteFirst(ListStatik *l, ElType *val);
 /* F.S. val adalah nilai elemen pertama l sebelum penghapusan, */
 /*      Banyaknya elemen List berkurang satu */
 /*      List l mungkin menjadi kosong */
-/* *** Menghapus elemen pada index tertentu     *** */
+/* *** Menghapus elemen pada index tertentu *** */
 void deleteAt(ListStatik *l, ElType *val, IdxType idx);
 /* Proses : Menghapus elemen pada index idx List */
 /* I.S. List tidak kosong, idx adalah index yang valid di l */

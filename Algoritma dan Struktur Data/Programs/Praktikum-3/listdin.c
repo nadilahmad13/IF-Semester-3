@@ -102,7 +102,7 @@ void readList(ListDin *l)
         scanf("%d", &n);
     }
     NEFF(*l) = n;
-    
+
     // Baca elemen
     if (n != 0){ // List akan dibaca hanya jika list tidak kosong
         for (i = 0; i < n; i++) {
