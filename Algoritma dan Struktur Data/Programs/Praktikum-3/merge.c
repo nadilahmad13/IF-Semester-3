@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "listdin.h"
+#include "listdin.c"
 
 int main(){
     ListDin l1,l2,l3;
@@ -20,10 +20,9 @@ int main(){
     sort(&l1,true);
     sort(&l2,true);
 
-    // merge l1 and l2 to l3 without duplicate
     int i,j;
     for (i = 0 ; i < listLength(l1) ; i++){
-        if (indexOf(l3,ELMT(l1,i)) == IDX_UNDEF){
+        if (indexOf(l3,ELMT(l1,i)) == IDX_UNDEF){ 
             insertLast(&l3,ELMT(l1,i));
         }
     }

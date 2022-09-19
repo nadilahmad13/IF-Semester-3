@@ -74,13 +74,13 @@ void copyMatrix(Matrix mIn, Matrix *mOut)
             ELMT(*mOut, i, j) = ELMT(mIn, i, j);
         }
     }
-    for (i = 0; i < ROW_EFF(mIn); i++)
-    {
-        for (j = 0; j < COL_EFF(mIn); j++)
-        {
-            ELMT(*mOut, i, j) = ELMT(mIn, i, j);
-        }
-    }
+    // for (i = 0; i < ROW_EFF(mIn); i++)
+    // {
+    //     for (j = 0; j < COL_EFF(mIn); j++)
+    //     {
+    //         ELMT(*mOut, i, j) = ELMT(mIn, i, j);
+    //     }
+    // }
 }
 
 /* ********** KELOMPOK BACA/TULIS ********** */
