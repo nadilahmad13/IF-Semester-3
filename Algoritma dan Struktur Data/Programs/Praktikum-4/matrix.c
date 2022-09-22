@@ -592,19 +592,8 @@ void RotateMat(Matrix *m)
    14 15 16 12
 
 */
-{
-    int i;
-    // // jika ganjil
-    // if (ROW_EFF(m) == 3){
-    //     int temp;
-    //     temp = ELMT(m,0,1);
-    //     ELMT(m,0,1) = ELMT(m,0,0);
-    //     temp = ELMT(m,0,2);
-    //     ELMT(m,0,2) = ;
-    //     temp = ELMT(m)
-    // }
-}
 
+// CONTOH Perpindahan :
 // 3 x 3
 // 0 1 = 0 0
 // 0 2 = 0 1
@@ -614,3 +603,6 @@ void RotateMat(Matrix *m)
 // 2 0 = 2 1
 // 1 0 = 2 0
 // 0 0 = 1 0
+{
+    int j;
+}

@@ -5,7 +5,7 @@
 // Deskripsi        : File "submatrix.c"
 
 #include <stdio.h>
-#include "matrix.h"
+#include "matrix.c"
 
 float sumSubmatrix(Matrix m, int startRow, int startCol, int n){
     float sum = 0;
