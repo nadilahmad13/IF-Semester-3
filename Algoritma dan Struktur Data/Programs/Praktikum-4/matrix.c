@@ -1,6 +1,6 @@
 // NIM              : 13521024
 // Nama             : Ahmad Nadil
-// Tanggal          : 14 September 2022
+// Tanggal          : 22 September 2022
 // Topik praktikum  : ADT Matrix
 // Deskripsi        : File "matrix.c"
 
@@ -74,13 +74,13 @@ void copyMatrix(Matrix mIn, Matrix *mOut)
             ELMT(*mOut, i, j) = ELMT(mIn, i, j);
         }
     }
-    // for (i = 0; i < ROW_EFF(mIn); i++)
-    // {
-    //     for (j = 0; j < COL_EFF(mIn); j++)
-    //     {
-    //         ELMT(*mOut, i, j) = ELMT(mIn, i, j);
-    //     }
-    // }
+    for (i = 0; i < ROW_EFF(mIn); i++)
+    {
+        for (j = 0; j < COL_EFF(mIn); j++)
+        {
+            ELMT(*mOut, i, j) = ELMT(mIn, i, j);
+        }
+    }
 }
 
 /* ********** KELOMPOK BACA/TULIS ********** */
@@ -438,3 +438,179 @@ void pTranspose(Matrix *m)
         }
     }
 }
+
+/* Operasi berbasis baris dan per kolom */
+
+
+float AvgRow(Matrix M, IdxType i)
+
+/* Menghasilkan rata-rata dari elemen pada baris ke-i */
+
+/* Prekondisi: i adalah indeks baris efektif dari M */
+{
+    float sum = 0;
+    int j;
+    for (j =  0 ;  j < COL_EFF(M) ; j++){
+        sum += ELMT(M,i,j);
+    }
+    return sum / COL_EFF(M);
+
+}
+
+
+float AvgCol(Matrix M, IdxType j)
+
+/* Menghasilkan rata-rata dari elemen pada kolom ke-j */
+
+/* Prekondisi: j adalah indeks kolom efektif dari M */
+{
+    float sum = 0;
+    int i;
+    for (i = 0 ; i < ROW_EFF(M) ; i++){
+        sum += ELMT(M,i,j);
+    }
+    return sum / ROW_EFF(M);
+}
+
+
+void MinMaxRow(Matrix M, IdxType i, ElType * max, ElType * min)
+
+/* I.S. i adalah indeks baris efektif dari M, M terdefinisi */
+
+/* F.S. max berisi elemen maksimum pada baris i dari M
+
+min berisi elemen minimum pada baris i dari M */
+{
+    *max = ELMT(M,i,0);
+    *min = *max;
+    int j;
+    for (j = 1 ; j < COL_EFF(M) ; j++){
+        if (ELMT(M,i,j) > *max){
+            *max =  ELMT(M,i,j);
+        }
+        if (ELMT(M,i,j) < *min){
+            *min =  ELMT(M,i,j);
+        }
+    }
+}
+
+
+void MinMaxCol(Matrix M, IdxType j, ElType * max, ElType * min)
+
+/* I.S. j adalah indeks kolom efektif dari M, M terdefinisi */
+
+/* F.S. max berisi elemen maksimum pada kolom j dari M
+
+min berisi elemen minimum pada kolom j dari M */
+{
+    *max = ELMT(M,0,j);
+    *min = *max;
+    int i;
+    for (i = 1 ; i < ROW_EFF(M) ; i++){
+        if (ELMT(M,i,j) > *max){
+            *max =  ELMT(M,i,j);
+        }
+        if (ELMT(M,i,j) < *min){
+            *min =  ELMT(M,i,j);
+        }
+    }
+}
+
+
+int CountNumRow(Matrix M, IdxType i, ElType X)
+
+/* Menghasilkan banyaknya kemunculan X pada baris i dari M */
+{
+    int j;
+    int count = 0;
+    for (j = 0 ; j < COL_EFF(M) ; j++){
+        if (ELMT(M,i,j) == X){
+            count ++;
+        }
+    }
+    return count;
+
+}
+
+int CountNumCol(Matrix M, IdxType j, ElType X)
+
+/* Menghasilkan banyaknya kemunculan X pada kolom j dari M */
+{
+    int i;
+    int count = 0;
+    for (i = 0 ; i < ROW_EFF(M) ; i++){
+        if(ELMT(M,i,j) == X){
+            count++;
+        }
+    }
+    return count;
+}
+
+void RotateMat(Matrix *m)
+
+/* I.S. m terdefinisi dan IsSquare(m) */
+
+/* F.S. m "di-rotasi" searah jarum jam
+
+   untuk semua "lapisan" elemen mulai dari yang terluar
+
+   Contoh matrix 3x3 sebelum dirotasi:
+
+   1 2 3
+
+   4 5 6
+
+   7 8 9
+
+
+   Contoh matrix 3x3 setelah dirotasi:
+
+   4 1 2
+
+   7 5 3
+
+   8 9 6
+
+   Contoh matrix 4x4 sebelum dirotasi:
+
+   1 2 3 4
+
+   5 6 7 8
+
+   9 10 11 12
+
+   13 14 15 16
+
+   Contoh matrix 4x4 setelah dirotasi:
+
+   5 1 2 3
+
+   9 10 6 4
+
+   13 11 7 8
+
+   14 15 16 12
+
+*/
+{
+    int i;
+    // // jika ganjil
+    // if (ROW_EFF(m) == 3){
+    //     int temp;
+    //     temp = ELMT(m,0,1);
+    //     ELMT(m,0,1) = ELMT(m,0,0);
+    //     temp = ELMT(m,0,2);
+    //     ELMT(m,0,2) = ;
+    //     temp = ELMT(m)
+    // }
+}
+
+// 3 x 3
+// 0 1 = 0 0
+// 0 2 = 0 1
+// 1 2 = 0 2
+// 2 2 = 1 2
+// 2 1 = 2 2
+// 2 0 = 2 1
+// 1 0 = 2 0
+// 0 0 = 1 0
