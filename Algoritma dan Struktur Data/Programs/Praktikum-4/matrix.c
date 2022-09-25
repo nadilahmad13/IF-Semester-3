@@ -595,14 +595,15 @@ void RotateMat(Matrix *m)
 
 // CONTOH Perpindahan :
 // 3 x 3
-// 0 1 = 0 0
-// 0 2 = 0 1
-// 1 2 = 0 2
-// 2 2 = 1 2
-// 2 1 = 2 2
-// 2 0 = 2 1
-// 1 0 = 2 0
-// 0 0 = 1 0
+// ELMT(0 1) = ELMT(0 0)
+// ELMT(0 2) = ELMT(0 1)
+// ELMT(1 2) = ELMT(0 2)
+// ELMT(2 2) = ELMT(1 2)
+// ELMT(2 1) = ELMT(2 2)
+// ELMT(2 0) = ELMT(2 1)
+// ELMT(1 0) = ELMT(2 0)
+// ELMT(0 0) = ELMT(1 0)
+
 {
-    int j;
+    int i;
 }
