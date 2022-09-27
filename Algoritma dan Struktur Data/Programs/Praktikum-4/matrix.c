@@ -605,5 +605,43 @@ void RotateMat(Matrix *m)
 // ELMT(0 0) = ELMT(1 0)
 
 {
+    int row = 0, col = 0;
+    int previous, current;
+    int a = ROW_EFF(*m);
+    int b = COL_EFF(*m);
     int i;
+    while (row < a && col < b) {
+        if (row + 1 == a || col + 1 == b) {
+            break;
+        }
+        previous = ELMT(*m,row + 1,col);
+        for (i = col; i < b; i++) {
+            current = ELMT(*m,row,i);
+            ELMT(*m,row,i) = previous;
+            previous = current;
+        }
+        row++;
+        for (i = row; i < a; i++) {
+            current = ELMT(*m,i,b-1);
+            ELMT(*m,i,b-1) = previous;
+            previous = current;
+        }
+        b--;
+        if (row < a) {
+            for (i = b-1; i >= col; i--) {
+                current = ELMT(*m,a-1,i);
+                ELMT(*m,a-1,i) = previous;
+                previous = current;
+            }
+        }
+        a--;
+        if (col < b) {
+            for (i = a-1; i >= row; i--) {
+                current = ELMT(*m,i,col);
+                ELMT(*m,i,col) = previous;
+                previous = current;
+            }
+        }
+        col++;
+    }
 }
