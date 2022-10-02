@@ -6,5 +6,5 @@ boolean EndWord;
 Word currentWord;
 
 int main(){
-
+    
 }

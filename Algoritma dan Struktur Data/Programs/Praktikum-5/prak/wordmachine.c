@@ -1,6 +1,6 @@
 // NIM              : 13521024
 // Nama             : Ahmad Nadil
-// Tanggal          : 27 September 2022
+// Tanggal          : 29 September 2022
 // Topik praktikum  : ADT Mesin Kata
 // Deskripsi        : File "wordmachine.c"
 
@@ -27,7 +27,15 @@ void STARTWORD()
           currentChar karakter pertama sesudah karakter terakhir kata */
 {
    START();
-   IgnoreBlanks();         chars = (int) currentChar;
+   IgnoreBlanks();
+   if (currentChar == MARK){
+      endWord = true;
+   }
+   else{
+      endWord = false;
+      CopyWord();
+   }
+}
 
 void ADVWORD()
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
@@ -76,113 +84,10 @@ void LowerCase()
 
 /* F.S. currentword menjadi lowercase di setiap karakternya */
 {
-   int chars;
-   char lower;
    int i;
-   // while (currentChar != MARK && currentChar != BLANK){
-   //    for (i = 0 ; i < currentWord.Length ; i++){
-   //       chars = (int) currentChar;
-   //       if (chars >= 65 && chars <= 90){
-   //             lower = chars + 32;
-   //             currentWord.TabWord[i] = lower; 
-   //       }
-   //       i++;
-   //       ADV();
-   //    }
-   // }
-
-   while (currentChar != MARK && currentChar != BLANK){
-      for (i = 0 ; i < currentWord.Length ; i++){
-         if (chars >= 65 && chars <= 90){
-            (int) currentWord.TabWord[i] += 32; 
-         }
-         i++;
-         ADV();
+   for (i = 0; i < currentWord.Length; i++){
+      if (currentWord.TabWord[i] >= 'A' && currentWord.TabWord[i] <= 'Z'){
+         currentWord.TabWord[i] = currentWord.TabWord[i] + 'a' - 'A';
       }
    }
-
-
-   // int i = 0;
-   // while (!endWord){
-   //    if (currentWord.TabWord[i] == "A"){
-   //       currentWord.TabWord[i] = "a";
-   //    }
-   //    if (currentWord.TabWord[i] == "B"){
-   //       currentWord.TabWord[i] = "b";
-   //    }
-   //    if (currentWord.TabWord[i] == "C"){
-   //       currentWord.TabWord[i] = "c";
-   //    }
-   //    if (currentWord.TabWord[i] == "D"){
-   //       currentWord.TabWord[i] = "d";
-   //    }
-   //    if (currentWord.TabWord[i] == "E"){
-   //       currentWord.TabWord[i] = "e";
-   //    }
-   //    if (currentWord.TabWord[i] == "F"){
-   //       currentWord.TabWord[i] = "f";
-   //    }
-   //    if (currentWord.TabWord[i] == "G"){
-   //       currentWord.TabWord[i] = "g";
-   //    }
-   //    if (currentWord.TabWord[i] == "H"){
-   //       currentWord.TabWord[i] = "h";
-   //    }
-   //    if (currentWord.TabWord[i] == "I"){
-   //       currentWord.TabWord[i] = "i";
-   //    }
-   //    if (currentWord.TabWord[i] == "J"){
-   //       currentWord.TabWord[i] = "j";
-   //    }
-   //    if (currentWord.TabWord[i] == "K"){
-   //       currentWord.TabWord[i] = "k";
-   //    }
-   //    if (currentWord.TabWord[i] == "L"){
-   //       currentWord.TabWord[i] = "l";
-   //    }
-   //    if (currentWord.TabWord[i] == "M"){
-   //       currentWord.TabWord[i] = "m";
-   //    }
-   //    if (currentWord.TabWord[i] == "N"){
-   //       currentWord.TabWord[i] = "n";
-   //    }
-   //    if (currentWord.TabWord[i] == "O"){
-   //       currentWord.TabWord[i] = "o";
-   //    }
-   //    if (currentWord.TabWord[i] == "P"){
-   //       currentWord.TabWord[i] = "p";
-   //    }
-   //    if (currentWord.TabWord[i] == "Q"){
-   //       currentWord.TabWord[i] = "q";
-   //    }
-   //    if (currentWord.TabWord[i] == "R"){
-   //       currentWord.TabWord[i] = "r";
-   //    }
-   //    if (currentWord.TabWord[i] == "S"){
-   //       currentWord.TabWord[i] = "s";
-   //    }
-   //    if (currentWord.TabWord[i] == "T"){
-   //       currentWord.TabWord[i] = "t";
-   //    }
-   //    if (currentWord.TabWord[i] == "U"){
-   //       currentWord.TabWord[i] = "u";
-   //    }
-   //    if (currentWord.TabWord[i] == "V"){
-   //       currentWord.TabWord[i] = "v";
-   //    }
-   //    if (currentWord.TabWord[i] == "W"){
-   //       currentWord.TabWord[i] = "w";
-   //    }
-   //    if (currentWord.TabWord[i] == "X"){
-   //       currentWord.TabWord[i] = "x";
-   //    }
-   //    if (currentWord.TabWord[i] == "Y"){
-   //       currentWord.TabWord[i] = "y";
-   //    }
-   //    if (currentWord.TabWord[i] == "Z"){
-   //       currentWord.TabWord[i] = "z";
-   //    }
-   //    i++;
-   //    ADV();
-   // }
 }
