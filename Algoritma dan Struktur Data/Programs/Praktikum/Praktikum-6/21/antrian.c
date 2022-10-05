@@ -1,8 +1,3 @@
-// Nama: Gagas Praharsa Bahar
-// NIM: 13520016
-// Antrian Kereta
-
-
 #include <stdio.h>
 #include "queue.h"
 
