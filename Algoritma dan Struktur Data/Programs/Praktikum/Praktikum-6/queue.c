@@ -98,34 +98,14 @@ void displayQueue(Queue q)
 /* Jika Queue kosong : menulis [] */
 {
     int i;
-    if (isEmpty(q)){
+    if (isEmpty(q))
         printf("[]\n");
-    }
     else {
         printf("[");
-        if (IDX_HEAD(q) < IDX_TAIL(q)){
-            for (i = IDX_HEAD(q) ; i <= IDX_TAIL(q) ; i++){
-                if (i != IDX_TAIL(q)){
-                    printf("%d,", q.buffer[i]);
-                }
-                else {
-                    printf("%d", q.buffer[i]);
-                }
-            }
+        for (i = IDX_HEAD(q); i != IDX_TAIL(q); i = (i+1)%CAPACITY){
+            printf("%d,", q.buffer[i]);
         }
-        else{
-            for (i = IDX_HEAD(q) ; i <= CAPACITY - 1; i++){
-                printf("%d,", q.buffer[i]);
-            }
-            for (i = 0 ; i <= IDX_TAIL(q) ; i++){
-                if (i != IDX_TAIL(q)){
-                    printf("%d,", q.buffer[i]);
-                }
-                else {
-                    printf("%d", q.buffer[i]);
-                }
-            }
-        }
-        printf("]\n");
+        printf("%d]\n", q.buffer[i]);
     }
+
 }
