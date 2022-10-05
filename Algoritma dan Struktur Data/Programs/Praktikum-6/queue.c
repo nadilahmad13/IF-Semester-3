@@ -30,7 +30,7 @@ boolean isFull(Queue q)
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
 /* yaitu IDX_TAIL akan selalu di belakang IDX_HEAD dalam buffer melingkar*/
 {
-    return (IDX_TAIL(q) == IDX_HEAD(q) - 1);
+    return(IDX_HEAD(q) == 0) && (IDX_TAIL(q) == CAPACITY-1);
 }
 
 int length(Queue q)
@@ -99,7 +99,7 @@ void displayQueue(Queue q)
 {
     int i;
     if (isEmpty(q)){
-        printf("[]");
+        printf("[]\n");
     }
     else {
         printf("[");
@@ -126,5 +126,6 @@ void displayQueue(Queue q)
                 }
             }
         }
+        printf("]\n");
     }
 }
