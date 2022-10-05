@@ -1,7 +1,3 @@
-// Nama: Gagas Praharsa Bahar
-// NIM: 13520016
-// Caesar Cipher
-
 #include "boolean.h"
 #include "charmachine.h"
 #include "wordmachine.h"
