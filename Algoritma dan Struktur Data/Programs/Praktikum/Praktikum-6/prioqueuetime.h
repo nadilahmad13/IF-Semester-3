@@ -1,10 +1,10 @@
-/* File : prioqueue.h */
-/* Definisi ADT Priority Queue Char dengan representasi array secara eksplisit dan alokasi dinamik */
+/* File : prioqueuetime.h */
+/* Definisi ADT Priority Queue Time dengan representasi array secara eksplisit dan alokasi dinamik */
 /* Model Implementasi Versi III dengan circular buffer */
 /* Elemen queue terurut membesar berdasarkan elemen time */
 
-#ifndef prioqueuechar_H
-#define prioqueuechar_H
+#ifndef prioqueuetime_H
+#define prioqueuetime_H
 
 #include "boolean.h"
 
@@ -17,7 +17,7 @@ typedef struct {
     char info;  /* elemen karakter */
 } infotype;
 typedef int address;   /* indeks tabel */
-/* Contoh deklarasi variabel bertype PrioQueueChar : */
+/* Contoh deklarasi variabel bertype PrioQueueTime : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
 typedef struct {
     infotype * T;   /* tabel penyimpan elemen */
@@ -64,7 +64,7 @@ void DeAlokasi(PrioQueueTime * Q);
 
 /* *** Primitif Add/Delete *** */
 void Enqueue (PrioQueueTime * Q, infotype X);
-/* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut mengecil berdasarkan time */
+/* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut membesar berdasarkan time */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
         TAIL "maju" dengan mekanisme circular buffer; */
