@@ -5,7 +5,7 @@
 // Deskripsi        : File "antrianSix.c"
 
 #include <stdio.h>
-#include "queue.h"
+#include "queue.c"
 
 int main(){
     int menu, time, val;
