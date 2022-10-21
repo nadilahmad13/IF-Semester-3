@@ -30,20 +30,20 @@ var
 
 { ALGORITMA }
     P1 <- NIL
-    P <- First(L)
+    P <- l
     while (P != Nil) do
-        if (Info(P) < 0) then
+        if (P^.info < 0) then
             if (P1 = NIL) then
-                First (L) <- Next (P)
-                Dealokasi(P)
-                P <- First(L)
+                l <- P^.next
+                dealokasi(P)
+                P <- l
             else
-                Next(P1) <- Next(P)
-                Dealokasi(P)
-                P <- Next(P1)
+                P1^.next <- P^.next
+                dealokasi(P)
+                P <- P1^.next
         else
             P1 <- P
-            P <- Next (P1)
+            P <- P1^.next
 
 procedure copyPos(input l1 : List, output l2 : List)
 { Menyalin semua elemen bernilai positif dari sebua list of integer l1 menjadi l2}
@@ -75,3 +75,20 @@ procedure sortedInsert (input/output l : List, input x : ElType)
         while (p^.next != NIL) AND (p^.next^.info <  x) do
             p <- p^.next
         insertAt(p,x)
+
+procedure updateList(input x,y : infotype, input/output l : list)
+{Menerima sebuah infotype x dan y dan sebuah list l dan kemudian mengganti elemen pertama l
+yang bernilai x dengan y jika x ada di l.}
+
+{ KAMUS LOKAL }
+   p : address
+   flag : boolean
+
+{ ALGORITMA }
+    p <- l
+    flag <- false
+    while (p != NIL and not flag) do
+        if (p^.info = x) then
+            p^.info <- y
+            flag <- true
+        p <- p^.next
