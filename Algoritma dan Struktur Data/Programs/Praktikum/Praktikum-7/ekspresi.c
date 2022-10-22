@@ -7,8 +7,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "stack.c"
-#include "wordmachine.c"
+#include "stack.h"
+#include "wordmachine.h"
+
+boolean isOperator(char *c){
+    return (c[0] == '+' || c[0] == '-' || c[0] == '*' || c[0] == '/' || c[0] == '^');
+}
+
+int evaluate(int a, int b, char t)
+{
+    if (t == '+')
+    {
+        return a + b;
+    }
+    else if (t == '-')
+    {
+        return a - b;
+    }
+    else if (t == '*')
+    {
+        return a * b;
+    }
+    else if (t == '/')
+    {
+        return a / b;
+    }
+    else if (t == '^')
+    {
+        return pow(a, b);
+    }
+}
 
 int main()
 {
@@ -17,39 +45,22 @@ int main()
     STARTWORD();
     int temp;
     int val1, val2;
-    int i;
+    int i = 0;
     while (!endWord){
-        if (currentWord.TabWord[0] >= '0' && currentWord.TabWord[0] <= '9'){
-            printf("%s", currentWord.TabWord);
+        if (!isOperator(currentWord.TabWord)){
             temp = 0;
             for (i = 0; i < currentWord.Length; i++){
                 temp = temp * 10 + (currentWord.TabWord[i] - 48);
             }
             Push(&S, temp);
-            printf("\n");
-        } else {
+            printf("%d\n", temp);
+        }
+        else{
             Pop(&S, &val2);
             Pop(&S, &val1);
-            printf("%d %c %d", val1, currentWord.TabWord[0], val2);
-            switch (currentWord.TabWord[0]){
-                case '+':
-                    temp = val1 + val2;
-                    break;
-                case '-':
-                    temp = val1 - val2;
-                    break;
-                case '*':
-                    temp = val1 * val2;
-                    break;
-                case '/':
-                    temp = val1 / val2;
-                    break;
-                case '^':
-                    temp = pow(val1, val2);
-                    break;
-            }
-            printf("\n%d\n", temp);
-            Push(&S, temp);
+            printf("%d %c %d\n", val1, currentWord.TabWord[0], val2);
+            Push(&S, evaluate(val1, val2, currentWord.TabWord[0]));
+            printf("%d\n", InfoTop(S));
         }
         ADVWORD();
     }
