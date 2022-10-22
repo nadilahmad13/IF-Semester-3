@@ -48,6 +48,7 @@ var
 procedure copyPos(input l1 : List, output l2 : List)
 { Menyalin semua elemen bernilai positif dari sebua list of integer l1 menjadi l2}
 
+{ ALTERNATIF 1 }
 { KAMUS LOKAL }
    p : address
 
@@ -58,6 +59,7 @@ procedure copyPos(input l1 : List, output l2 : List)
             if (p^.info > 0) then
                 insertLast(l2, p^.info)
             p <- p^.next
+
 
 procedure sortedInsert (input/output l : List, input x : ElType)
 { Menambahkan sebuah elemen x pada sebuah list of integer l yang terurut menaik }
