@@ -38,14 +38,60 @@
 #include <stdlib.h>
 #include "stack.c"
 
-boolean isAllZero(Stack S){
-    int i;
-    for (i = 0; i < Top(S); i++){
-        if (S.T[i] != 0){
-            return false;
+void deleteZero(Stack *S){
+    // menghapus angka 0 pada stack paling bawah
+    int temp;
+    if (IsEmpty(*S)){
+        return;
+    }
+    else{
+        Pop(S, &temp);
+        if (temp == 0){
+            deleteZero(S);
+        }
+        else{
+            Push(S, temp);
         }
     }
-    return true;
+}
+
+void copyStack(Stack Sa, Stack *Sb){
+    int temp;
+    if (IsEmpty(Sa)){
+        return;
+    }
+    else{
+        Pop(&Sa, &temp);
+        copyStack(Sa, Sb);
+        Push(Sb, temp);
+    }
+}
+
+boolean isSmaller(Stack S1, Stack S2){
+    // mengembalikan true jika S1 < S2
+    int temp1, temp2;
+    if (IsEmpty(S1) && IsEmpty(S2)){
+        return false;
+    }
+    else if (IsEmpty(S1)){
+        return true;
+    }
+    else if (IsEmpty(S2)){
+        return false;
+    }
+    else{
+        Pop(&S1, &temp1);
+        Pop(&S2, &temp2);
+        if (temp1 < temp2){
+            return true;
+        }
+        else if (temp1 > temp2){
+            return false;
+        }
+        else{
+            return isSmaller(S1, S2);
+        }
+    }
 }
 
 int main()
@@ -73,168 +119,61 @@ int main()
         Push(&S2, temp);
         scanf("%c", &tempc);
     }
-
-    // PENGURANGAN S1-S2
-    int val1, val2;
-    int negatif = 0;
-    while(!IsEmpty(S1) && !IsEmpty(S2)){
-        Pop(&S1, &val1);
-        Pop(&S2, &val2);
-        if (val1 < val2){
-            temp = val2 - val1;
-            negatif = 1;
-        } else {
-            temp = val1 - val2;
-        }
-        Push(&S3, temp);
-    }
     
-    while(!IsEmpty(S1)){
+    // KURANGAN
+    int i;
+    int val1, val2;
+    int temp1, temp2;
+    boolean negatif = false;
+
+    Stack Sa;
+    CreateEmpty(&Sa);
+    copyStack(S1, &Sa);
+
+    Stack Sb;
+    CreateEmpty(&Sb);
+    copyStack(S2, &Sb);
+
+    while (!IsEmpty(S1) && !IsEmpty(S2)){
+        if (isSmaller(S1, S2)){
+            negatif = true;
+            Pop(&S1, &val1);
+            Pop(&S2, &val2);
+            temp1 = val2 - val1;
+            Push(&S3, temp1);
+        }
+        else{
+            Pop(&S1, &val1);
+            Pop(&S2, &val2);
+            temp1 = val1 - val2;
+            Push(&S3, temp1);
+        }
+    }
+
+    while (!IsEmpty(S1)){
         Pop(&S1, &val1);
         Push(&S3, val1);
     }
 
-    while(!IsEmpty(S2)){
+    while (!IsEmpty(S2)){
         Pop(&S2, &val2);
         Push(&S3, val2);
     }
 
+    deleteZero(&S3);
+    
     // OUTPUT
-    if (isAllZero(S3)){
-        int zero = 0;
-        printf("%d", zero);
-    } else {
-        if (negatif == 1){
-            printf("-");
+    if (IsEmpty(S3)){
+        printf("%d\n",0);
+    }
+    else{
+        if (negatif){
+            printf("%c", '-');
         }
-        while(!IsEmpty(S3)){
+        while (!IsEmpty(S3)){
             Pop(&S3, &temp);
             printf("%d", temp);
         }
     }
-    printf("\n");
     return 0;
 }
-
-// boolean IsEqual(Stack S1, Stack S2){
-//     Stack temp1, temp2;
-//     CreateEmpty(&temp1);
-//     CreateEmpty(&temp2);
-
-//     temp1 = S1;
-//     temp2 = S2;
-
-//     int val1,val2;
-//     boolean flag = true;
-
-//     while (!IsEmpty(temp1) && !IsEmpty(temp2) && flag){
-//         Pop(&temp1,&val1);
-//         Pop(&temp2,&val2);
-//         if (val1 != val2){
-//             flag = false;
-//         }
-//     }
-
-//     return flag;
-// }
-
-// int main()
-// {
-//     Stack S1, S2, S3;
-//     CreateEmpty(&S1);
-//     CreateEmpty(&S2);
-//     CreateEmpty(&S3);
-
-//     char tempc;
-//     int temp;
-
-//     // INPUT S1
-//     scanf("%c", &tempc);
-//     while(tempc != '\n'){
-//         temp = tempc - 48;
-//         Push(&S1, temp);
-//         scanf("%c", &tempc);
-//     }
-
-//     // INPUT S2
-//     scanf("%c", &tempc);
-//     while(tempc != '\n'){
-//         temp = tempc - 48;
-//         Push(&S2, temp);
-//         scanf("%c", &tempc);
-//     }
-
-//     // PENGURANGAN
-//     int carry = 0;
-    
-//     while(!IsEmpty(S1) && !IsEmpty(S2))
-//     {
-//         Pop(&S1, &temp);
-//         carry += temp;
-//         Pop(&S2,&temp);
-//         carry -= temp;
-//         Push(&S3, carry);
-//         carry = 0;
-//     }
-    
-//     if (ius(S3)){
-//         int zero = 0;
-//         printf("%d\n",zero);
-//     }
-//     else{
-//         while(!IsEmpty(S3)){
-//             Pop(&S3, &temp);
-//             printf("%d", temp);
-//         }
-//     }
-//     return 0;
-// }
-
-// int stacktoint (Stack S){
-//     // Stack STemp;
-//     // CreateEmpty(&STemp);
-//     // STemp = S;
-//     int temp;
-//     int result = 0;
-//     int i = 1;
-//     while (!IsEmpty(S)){
-//         result = result + InfoTop(S) * i;
-//         Pop(&S,&temp);
-//         i *= 10;
-//     }
-//     return result;
-// }
-
-// int main()
-// {
-//     Stack S1, S2, S3;
-//     CreateEmpty(&S1);
-//     CreateEmpty(&S2);
-//     CreateEmpty(&S3);
-
-//     char tempc;
-//     int temp;
-
-//     // INPUT S1
-//     scanf("%c", &tempc);
-//     while(tempc != '\n'){
-//         temp = tempc - 48;
-//         Push(&S1, temp);
-//         scanf("%c", &tempc);
-//     }
-
-//     // INPUT S2
-//     scanf("%c", &tempc);
-//     while(tempc != '\n'){
-//         temp = tempc - 48;
-//         Push(&S2, temp);
-//         scanf("%c", &tempc);
-//     }
-
-//     int val1 = stacktoint(S1);
-//     int val2 = stacktoint(S2);
-
-//     printf("%d\n",(val1-val2));
-
-//     return 0;
-// }
