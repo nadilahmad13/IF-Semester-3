@@ -1,7 +1,3 @@
-// Nama: Gagas Praharsa Bahar
-// NIM: 13520016
-// Mesin Ekspresi
-
 #include <stdio.h>
 #include "stack.c"
 #include "tokenmachine.c"

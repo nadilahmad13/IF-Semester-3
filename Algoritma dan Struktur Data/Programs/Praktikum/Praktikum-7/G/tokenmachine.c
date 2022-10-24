@@ -1,7 +1,3 @@
-// Nama: Gagas Praharsa Bahar
-// NIM: 13520016
-// Token Machine
-
 #include "boolean.h"
 #include "tokenmachine.h"
 #include "charmachine.c"

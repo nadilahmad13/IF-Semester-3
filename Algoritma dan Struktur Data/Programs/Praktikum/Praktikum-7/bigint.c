@@ -1,117 +1,142 @@
-#include <stdio.h>
-#include "stack.c"
+// NIM              : 13521024
+// Nama             : Ahmad Nadil
+// Tanggal          : 20 Oktober 2022
+// Topik praktikum  : ADT Stack
+// Deskripsi        : File "bigint.c"
 
-void copyStack(Stack Sa, Stack *Sb){
-    int temp;
-    if (IsEmpty(Sa)){
-        return;
-    }
-    else{
-        Pop(&Sa, &temp);
-        copyStack(Sa, Sb);
-        Push(Sb, temp);
-    }
+#include <stdio.h>
+#include <math.h>
+#include <string.h>
+#include "stack.h"
+
+int charToNum(char c) {
+    return (c - 48);
 }
 
-boolean isSmaller(Stack S1, Stack S2){
-    Stack STemp1, STemp2;
-    CreateEmpty(&STemp1);
-    CreateEmpty(&STemp2);
+char numToChar(int n) {
+    return (n + 48);
+}
 
-    copyStack(S1, &STemp1);
-    copyStack(S2, &STemp2);
-
+boolean isGreater(char arr1[100], char arr2[100]){
     int temp1, temp2;
-    
-    if (IsEmpty(STemp1) && IsEmpty(STemp2)){
-        return false;
-    }
-    else if (IsEmpty(STemp1)){
+    if (strlen(arr1) > strlen(arr2)) {
         return true;
     }
-    else if (IsEmpty(STemp2)){
+    else if (strlen(arr1) < strlen(arr2)) {
         return false;
     }
-    else{
-        // check all digits first before returning values
-        while (!IsEmpty(STemp1) && !IsEmpty(STemp2)){
-            Pop(&STemp1, &temp1);
-            Pop(&STemp2, &temp2);
-            if (temp1 < temp2){
-                // decrease next digitin stack by 1
-                int temp;
-                Pop(&STemp1, &temp);
-                Push(&STemp1, temp - 1);
+    else {
+        int idx = 0; 
+        while (idx < strlen(arr1)) {
+            if (arr1[idx] > arr2[idx]) {
+                return true;
             }
-            else if (temp1 >= temp2){
-                return false || isSmaller(STemp1, STemp2);
+            else if (arr1[idx] < arr2[idx]) {
+                return false;
             }
-        }
-        if (IsEmpty(STemp1)){
-            return true;
-        }
-        else if (IsEmpty(STemp2)){
-            return false;
+            idx++;
         }
     }
+    return true;
 }
 
-
-void deleteZero(Stack *S){
-    // menghapus angka 0 pada stack paling bawah
-    int temp;
-    if (IsEmpty(*S)){
-        return;
-    }
-    else{
-        Pop(S, &temp);
-        if (temp == 0){
-            deleteZero(S);
-        }
-        else{
-            Push(S, temp);
-        }
-    }
-}
-
-int main()
-{
-    Stack S1, S2, S3;
+int main() {
+    Stack S1, S2, Smin;
+    int val1, val2, result;
+    int i = 0;
+    int j = 0;
+    char arr1[100], arr2[100];
     CreateEmpty(&S1);
     CreateEmpty(&S2);
-    CreateEmpty(&S3);
-
-    char tempc;
-    int temp;
-
-    // INPUT S1
-    scanf("%c", &tempc);
-    while(tempc != '\n'){
-        temp = tempc - 48;
-        Push(&S1, temp);
-        scanf("%c", &tempc);
+    CreateEmpty(&Smin);
+    scanf("%s", &arr1);
+    while (arr1[i] != '\0') {
+        if (charToNum(arr1[i]) >= 0) {
+            Push(&S1,charToNum(arr1[i]));
+        }
+        i++;
     }
-
-    // INPUT S2
-    scanf("%c", &tempc);
-    while(tempc != '\n'){
-        temp = tempc - 48;
-        Push(&S2, temp);
-        scanf("%c", &tempc);
+    scanf("%s", &arr2);
+    while (arr2[j] != '\0'){
+        if (charToNum(arr2[j]) >= 0) {
+            Push(&S2, charToNum(arr2[j]));
+        }
+        j++;
     }
-
-    // S3 = S1-S2
-    int temp1, temp2;
-    if (isSmaller(S1,S2)){
-        
+    int sisa = 0;
+    if (isGreater(arr1, arr2)) {
+        while (!IsEmpty(S2)) {
+            Pop(&S1, &val1);
+            Pop(&S2, &val2);
+            result = val1 - val2 + sisa;
+            if (result < 0) {
+                sisa = -1; 
+                result += 10;
+                Push(&Smin, result);
+            }
+            else {
+                sisa = 0;
+                Push(&Smin, result);
+            }
+        }
+        while (!IsEmpty(S1)) {
+            Pop(&S1, &val1);
+            result =  val1 + sisa;
+            if (result < 0) {
+                sisa = -1; 
+                result += 10;
+                Push(&Smin, result);
+            }
+            else {
+                sisa = 0; 
+                Push(&Smin, result);
+            }
+        }
+        while (InfoTop(Smin) == 0 && Top(Smin) > 0) {
+            Pop(&Smin, &val1);
+        }
     }
-    
-    // OUTPUT
-    while (!IsEmpty(S3)){
-        Pop(&S3, &temp);
-        printf("%d", temp);
+    else {
+        while (!IsEmpty(S1)) {
+            Pop(&S1, &val1);
+            Pop(&S2, &val2);
+            result = val2 - val1 + sisa;
+            if (result < 0) {
+                sisa = -1; 
+                result += 10; 
+                Push(&Smin, result);
+            }
+            else {
+                sisa = 0; 
+                Push(&Smin, result);
+            }
+        }
+        while (!IsEmpty(S2)) {
+            Pop(&S2, &val2);
+            result = val2 + sisa; 
+            if (result < 0) {
+                sisa = -1; 
+                result += 10; 
+                Push(&Smin, result);
+            }
+            else {
+                sisa = 0; 
+                Push(&Smin, result);   
+            }
+        }
+        while (InfoTop(Smin) == 0 && Top(Smin) > 0) {
+            Pop(&Smin, &val1);
+        }
+        if (InfoTop(Smin) != 0) {
+            Pop(&Smin, &val2);
+            val2 *= -1; 
+            Push(&Smin, val2);
+        }
     }
-
+    int tempMinus;
+    while (!IsEmpty(Smin)) {
+        Pop(&Smin, &tempMinus);
+        printf("%d", tempMinus);
+    }
     printf("\n");
-    return 0;
 }

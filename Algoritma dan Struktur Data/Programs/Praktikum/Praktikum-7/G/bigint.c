@@ -1,8 +1,3 @@
-// Nama: Gagas Praharsa Bahar
-// NIM: 13520016
-// Big Integer
-
-
 #include <stdio.h>
 #include "stack.h"
 
