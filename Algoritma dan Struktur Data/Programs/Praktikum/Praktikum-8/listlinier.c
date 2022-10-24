@@ -1,3 +1,9 @@
+// NIM              : 13521024
+// Nama             : Ahmad Nadil
+// Tanggal          : 17 Oktober 2022
+// Topik praktikum  : ADT Linked List
+// Deskripsi        : File "listlinier.c"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "listlinier.h"
