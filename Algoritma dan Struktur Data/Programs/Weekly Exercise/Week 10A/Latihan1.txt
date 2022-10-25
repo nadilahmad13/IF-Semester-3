@@ -1,0 +1,62 @@
+{ SOAL NO. 1 }
+{ Buatlah prosedur insertFirst untuk sebuah list l dengan l adalah list
+    yang mencatat elemen pertama (First) dan elemen terakhir (Last) }
+
+procedure insertFirst (input/output l : List, input x : ElType)
+{I.S. l mungkin kosong, list ini termasuk list linier yang dicatat alamat
+    elemen pertama dan terakhir }
+{F.S. x menjadi elemen pertama l}
+
+{ KAMUS LOKAL }
+    p : Address
+
+{ ALGORITMA }
+    p <- newNode(x)
+    if (l = NIL) then
+        l^.first <- p
+        l^.last <- p
+    else
+        p^.next <- l^.first
+        l^.first <- p
+
+{ SOAL NO. 2 }
+{ Buatlah prosedur insertLast untuk sebuah list l dengan l adalah list
+    yang mencatat elemen pertama (First) dan elemen terakhir (Last) }
+
+procedure insertLast(input/output l : List, input x : ElType)
+{I.S. l mungkin kosong, list ini termasuk list linier yang dicatat alamat
+    elemen pertama dan terakhir }
+{F.S. x menjadi elemen terakhir l}
+
+{ KAMUS LOKAL }
+    p : Address
+
+{ ALGORITMA }
+    p <- newNode(x)
+    if (l = NIL) then
+        l^.first <- p
+        l^.last <- p
+    else
+        l^.last^.next <- p
+        l^.last <- p
+
+{ SOAL NO. 3 }
+{ Buatlah fungsisearch untuk mengetahui apakah sebuah nilai x terdapat dalam
+ sebuahlist l. l adalah List yang mencatat elemen pertama (First) dan elemen 
+ terakhir (Last) dan elemen terakhir adalah dummy. }
+
+function search (l : List, x : ElType) -> Boolean
+{Mengembalikan true jika x terdapat dalam l}
+
+{ KAMUS LOKAL }
+    p : Address
+
+{ ALGORITMA }
+    l^.last^.info <- x
+    p <- l^.first
+    while (p^.info != x) do
+        p <- p^.next
+    if (p = l^.last) then
+        -> false
+    else
+        -> true
