@@ -33,3 +33,4 @@ while(a > 0):
   b += 1
 for i in range(len(a_wik)):
     print(f'       {a_wik[i]}')
+input()
