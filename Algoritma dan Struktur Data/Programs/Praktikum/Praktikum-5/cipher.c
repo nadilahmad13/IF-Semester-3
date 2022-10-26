@@ -1,8 +1,6 @@
 #include "boolean.h"
 #include "charmachine.h"
 #include "wordmachine.h"
-// #include "charmachine.c"
-// #include "wordmachine.c"
 #include <stdio.h>
 
 int main(){
