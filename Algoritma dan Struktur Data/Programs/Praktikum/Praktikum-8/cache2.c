@@ -5,7 +5,7 @@
 // Deskripsi        : File "cache.c"
 
 #include <stdio.h>
-#include "listlinier.h"
+#include "listlinier.c"
 
 void displayCache(List l)
 {
@@ -22,25 +22,18 @@ void displayCache(List l)
 }
 
 int main(){
-    long long int n;
-    scanf("%lld", &n);
+    int n;
+    scanf("%d", &n);
     int i, temp, idx, val;
-    long long int q;
-    scanf("%lld", &q);
+    List l;
+    CreateList(&l);
+    for(i = 0; i < n; i++){
+        insertLast(&l, IDX_UNDEF);
+    }
+    int q;
+    double hit_counter = 0;
+    scanf("%d", &q);
     if (q > 0){
-        List l;
-        CreateList(&l);
-        int val = IDX_UNDEF;
-        if (n < q){
-            val = n;
-        }
-        else{
-            val = q;
-        }
-        for(i = 0; i < val; i++){
-            insertLast(&l, IDX_UNDEF);
-        }
-        long long int hit_counter = 0;
         for(i=1; i <= q; i++){
             boolean hit = false;
             scanf("%d", &temp);
@@ -49,7 +42,7 @@ int main(){
                 hit = true;
             }
             if(hit){
-                hit_counter += 1.00;
+                hit_counter ++;
                 deleteAt(&l, idx, &val);
                 insertFirst(&l, val);
                 printf("hit ");
@@ -63,7 +56,8 @@ int main(){
             }
             printf("\n");
         }
-        printf("hit ratio: %.2f\n",(double) hit_counter / q);
+        double ratio = hit_counter / q;
+        printf("hit ratio: %.2f\n",ratio);
     }
     else{
         printf("hit ratio: %.2f\n",0.00);

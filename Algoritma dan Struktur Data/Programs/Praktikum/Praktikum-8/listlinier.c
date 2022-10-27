@@ -1,6 +1,6 @@
 // NIM              : 13521024
 // Nama             : Ahmad Nadil
-// Tanggal          : 17 Oktober 2022
+// Tanggal          : 27 Oktober 2022
 // Topik praktikum  : ADT Linked List
 // Deskripsi        : File "listlinier.c"
 
@@ -226,7 +226,6 @@ int length(List l)
     }
     return len;
 }
-
 /****************** PROSES TERHADAP LIST ******************/
 List concat(List l1, List l2) 
 /* I.S. l1 dan l2 sembarang */
@@ -237,15 +236,187 @@ List concat(List l1, List l2)
 {
     List l3;
     CreateList(&l3);
-    Address p = FIRST(l1);
-    while (p != NULL) {
+    Address p = l1;
+    while(p != NULL){
         insertLast(&l3, INFO(p));
         p = NEXT(p);
     }
-    p = FIRST(l2);
-    while (p != NULL) {
+    p = l2;
+    while(p != NULL){
         insertLast(&l3, INFO(p));
         p = NEXT(p);
     }
     return l3;
+}
+
+/****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
+boolean fSearch(List L, Address P)
+/* Mencari apakah ada elemen list yang beralamat P */
+/* Mengirimkan true jika ada, false jika tidak ada */
+{
+    Address now;
+    boolean flag = false;
+    now = L;
+    while(now->next != NULL && !flag){
+        if(now==P){
+            flag = true;
+        }
+        now = now->next;
+    }
+    return flag;
+}
+
+Address searchPrec(List L, ElType X)
+/* Mengirimkan address elemen sebelum elemen yang nilainya=X */
+/* Mencari apakah ada elemen list dengan Info(P)=X */
+/* Jika ada, mengirimkan address Prec, dengan Next(Prec)=P dan Info(P)=X. */
+/* Jika tidak ada, mengirimkan Nil */
+/* Jika P adalah elemen pertama, maka Prec=Nil */
+/* Search dengan spesifikasi seperti ini menghindari */
+/* traversal ulang jika setelah Search akan dilakukan operasi lain */
+{
+    if(isEmpty(L) || length(L) == 1){
+        return NULL;
+    }
+    Address p = L;
+    Address previous;
+    while(p != NULL && INFO(p)!= X){
+        previous = p;
+        p = NEXT(p);
+    }
+    if(p == NULL){
+        return NULL;
+    }
+    else{
+        return previous;
+    }
+}
+
+/*** Prekondisi untuk Max/Min : List tidak kosong ***/
+ElType max(List l)
+/* Mengirimkan nilai info(P) yang maksimum */
+{
+    int maksimum;
+    Address p = l;
+    maksimum = p->info;
+    while(p != NULL){
+        if(INFO(p) > maksimum){
+            maksimum = INFO(p);
+        }
+        p = NEXT(p);
+    }
+    return maksimum;
+}
+
+Address adrMax(List l)
+/* Mengirimkan address P, dengan info(P) yang bernilai maksimum */
+{
+    int maksimum = max(l);
+    Address p = l;
+    while (p != NULL && INFO(p) != maksimum){
+        p = NEXT(p);
+    }
+    return p;
+}
+
+ElType min(List l)
+/* Mengirimkan nilai info(P) yang minimum */
+{
+    int minimum;
+    Address p = l;
+    minimum = INFO(p);
+    while (p != NULL){
+        if (INFO(p) < minimum){
+            minimum = INFO(p);
+        }
+        p = NEXT(p);
+    }
+    return minimum;
+}
+
+
+
+Address adrMin(List l)
+/* Mengirimkan address P, dengan info(P) yang bernilai minimum */
+{
+    int minimum = min(l);
+    Address p = l;
+    while(p != NULL && INFO(p) != minimum){
+        p = NEXT(p);
+    }
+    return p;
+}
+
+/***************** FUNGSI dan PROSEDUR TAMBAHAN **************/
+void deleteAll(List *l)
+/* Delete semua elemen list dan alamat elemen di-dealokasi */
+{
+    Address p = *l;
+    int value;
+    while(p != NULL){
+        deleteFirst(l, &value);
+        p = NEXT(p);
+    }
+    *l = NULL;
+}
+
+void copyList(List *l1, List *l2)
+/* I.S. L1 sembarang. F.S. L2=L1 */
+/* L1 dan L2 "menunjuk" kepada list yang sama.*/
+/* Tidak ada alokasi/dealokasi elemen */
+{
+    *l2 = *l1;
+}
+
+
+void inverseList(List *l)
+/* I.S. sembarang. */
+/* F.S. elemen list dibalik : */
+/* Elemen terakhir menjadi elemen pertama, dan seterusnya. */
+/* Membalik elemen list, tanpa melakukan alokasi/dealokasi. */
+{
+    if(!isEmpty(*l)){
+        int n = length(*l);
+        int i;
+        Address p = *l;
+        Address prev;
+        Address last;
+        while(NEXT(p)!= NULL){
+            p = NEXT(p);
+        }
+        last = p;
+        while (p != *l){
+            prev = *l;
+            while(NEXT(prev) != p){
+                prev = NEXT(prev);
+            }
+            NEXT(p) = prev;
+            p = prev;
+        }
+        NEXT(p) = NULL;
+        *l = last;
+    }
+}
+void splitList(List *l1, List *l2, List l)
+/* I.S. l mungkin kosong */
+/* F.S. Berdasarkan L, dibentuk dua buah list l1 dan l2 */
+/* L tidak berubah: untuk membentuk l1 dan l2 harus alokasi */
+/* l1 berisi separuh elemen L dan l2 berisi sisa elemen L */
+/* Jika elemen L ganjil, maka separuh adalah length(L) div 2 */
+{
+    CreateList(l1);
+    CreateList(l2);
+    int half = length(l) / 2;
+    int cnt = 0;
+    Address p = l;
+    while(p != NULL){
+        if(cnt < half){
+            insertLast(l1, INFO(p));
+        }
+        else{
+            insertLast(l2, INFO(p));
+        }
+        cnt++;
+        p = NEXT(p);
+    }
 }
