@@ -56,7 +56,4 @@ function search (l : List, x : ElType) -> Boolean
     p <- l^.first
     while (p^.info != x) do
         p <- p^.next
-    if (p = l^.last) then
-        -> false
-    else
-        -> true
+    -> (p != l^.last)
