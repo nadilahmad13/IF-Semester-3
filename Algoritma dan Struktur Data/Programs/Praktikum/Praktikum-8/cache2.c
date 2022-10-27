@@ -5,7 +5,7 @@
 // Deskripsi        : File "cache.c"
 
 #include <stdio.h>
-#include "listlinier.c"
+#include "listlinier.h"
 
 void displayCache(List l)
 {
