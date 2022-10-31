@@ -7,65 +7,62 @@
 #include <stdio.h>
 #include "listlinier.h"
 
-void displayCache(List l)
-{
-    printf("[");
-    Address p = FIRST(l);
-    while (p != NULL && INFO(p) != IDX_UNDEF) {
-        printf("%d", INFO(p));
-        p = NEXT(p);
-        if (p != NULL && INFO(p) != IDX_UNDEF) {
-            printf(",");
-        }
-    }
-    printf("]");
-}
-
 int main(){
-    long long int n;
-    scanf("%lld", &n);
-    int i, temp, idx, val;
-    long long int q;
-    scanf("%lld", &q);
+    int n;
+    scanf("%d", &n);
+
+    int i, x, temp;
+
+    List l;
+    CreateList(&l);
+
+    int q;
+    scanf("%d", &q);
+    
+    float hit_counter = 0;
+
     if (q > 0){
-        List l;
-        CreateList(&l);
-        int val = IDX_UNDEF;
-        if (n < q){
-            val = n;
-        }
-        else{
-            val = q;
-        }
-        for(i = 0; i < val; i++){
-            insertLast(&l, IDX_UNDEF);
-        }
-        long long int hit_counter = 0;
-        for(i=1; i <= q; i++){
-            boolean hit = false;
-            scanf("%d", &temp);
-            idx = indexOf(l,temp);
-            if(idx != IDX_UNDEF){
-                hit = true;
+        for (i = 0 ; i < q ; i ++){
+            scanf("%d", &x);
+            if (isEmpty(l)){
+                if (length(l) < n)
+                {
+                    insertFirst(&l, x);
+                }
+                printf("miss ");
+                displayList(l);
+                printf("\n");
             }
-            if(hit){
-                hit_counter += 1.00;
-                deleteAt(&l, idx, &val);
-                insertFirst(&l, val);
+            else if (indexOf(l, x) != IDX_UNDEF){
+                hit_counter++;
+                deleteAt(&l, indexOf(l, x), &temp);
+                insertFirst(&l, x);
                 printf("hit ");
-                displayCache(l);
+                displayList(l);
+                printf("\n");
+            }
+            else if (length(l) == n){
+                deleteLast(&l, &temp);
+                insertFirst(&l, x);
+
+                printf("miss ");
+                displayList(l);
+                printf("\n");
             }
             else{
-                deleteLast(&l, &val);
-                insertFirst(&l, temp);
+                insertFirst(&l, x);
                 printf("miss ");
-                displayCache(l);
+                displayList(l);
+                printf("\n");
             }
-            printf("\n");
-        }
-        printf("hit ratio: %.2f\n",(double) hit_counter / q);
+	    }
+
+        double ratio = hit_counter / q;
+        printf("hit ratio: %.2f\n",ratio);
     }
+
     else{
         printf("hit ratio: %.2f\n",0.00);
     }
+    return 0;
 }
