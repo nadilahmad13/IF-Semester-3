@@ -1,0 +1,17 @@
+Bagioan 1
+a. Istri dari Vito 
+suami(vito,X).
+
+b. Adik dari Elon Musk
+adik(elonMusk,X).
+
+c. Cicit dari Gojo
+d. Paman atau bibi tertua dari Wesly (pilih yang tertua)
+e. Pasangan dari ipar Aqua (X adalah ipar Y jika X adalah saudara dari suami/istri Y)
+f. Cucu termuda dari Khelli
+g. Orang yang menjadi anak kedua dari keluarganya*
+h. Orang tua yang memiliki tepat dua anak
+i. Orang yang punya mertua
+j. Wanita yang punya lebih dari 1 anak
+k. Orang yang belum pernah melahirkan ketika berusia di atas 20 tahun
+l. Keturunan dari Gede yang umurnya tidak lebih kecil dari 25 tahun
