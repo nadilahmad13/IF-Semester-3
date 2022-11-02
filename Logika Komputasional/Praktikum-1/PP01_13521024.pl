@@ -87,8 +87,6 @@ saudara(power, ave).
 saudara(ave, power).
 saudara(elonMusk, patrick).
 saudara(patrick, elonMusk).
-saudara(wesly, wulandari).
-saudara(wulandari, wesly).
 
 /* ATURAN */
 % kakak(X,Y) : X adalah kakak dari Y (baik perempuan maupun lelaki)
@@ -135,9 +133,9 @@ cucu(X,Y) :-
     anak(U,Y).
 
 % keturunan(X,Y): X adalah keturunan dari Y (berlaku untuk anak, cucu, dan seterusnya)
-keturunan(X,Y) :-
-    anak(X,Z),
-    keturunan(Z,Y).
+keturunan(X,Y) :- anak(X,Y).
+keturunan(X,Y) :- cucu(X,Y).
+keturunan(X,Y) :- anak(X,U), keturunan(U,Y).
     
 % anaksulung(X) : X adalah anak paling tua
 % anaksulung(X) :-
@@ -156,22 +154,3 @@ anakbungsu(X) :-
     anak(X,Y),
     wanita(Y), /*atau pria(Y)*/
     \+kakak(X,_).
-
-adik(X,Y) :-
-    saudara(X,Y),
-    usia(X,U),
-    usia(Y,V),
-    U<V.
-
-% QUERY
-% a. Istri dari Vito
-% ?- menikah(X,vito).
-
-% b. Adik dari Elon Musk
-% ?- saudara(X,elonMusk).
-
-% c. Cicit dari Gojo
-% ?- anak(X,gojo), anak(Y,X), anak(Z,Y).
-
-% Paman atau bibi tertua dari Wesly (pilih yang tertua)
-% ?- anak(X,wesly),

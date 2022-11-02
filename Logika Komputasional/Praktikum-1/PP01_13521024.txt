@@ -1,17 +1,164 @@
-Bagioan 1
+BAGIAN I: Fakta, Rule, dan Query
+
 a. Istri dari Vito 
-suami(vito,X).
+Query: 
+    | ?- suami(vito,X).
+    X = power
+
+    yes
 
 b. Adik dari Elon Musk
-adik(elonMusk,X).
+Query: 
+    | ?- saudara(X,elonMusk).
+    X = patrick
+
+    yes
 
 c. Cicit dari Gojo
+Query:
+    | ?- cucu(X,gojo), anak(Y,X).
+
+    X = wesly
+    Y = anya ? 
+
+    yes
+
 d. Paman atau bibi tertua dari Wesly (pilih yang tertua)
+Query:
+    | ?- anak(wesly,X), kakak(Y,X).
+
+    X = vito
+    Y = vanRossum ? 
+
+    yes
+
 e. Pasangan dari ipar Aqua (X adalah ipar Y jika X adalah saudara dari suami/istri Y)
+Query:
+    | ?- menikah(aqua,X), saudara(X,Y), menikah(Y,Z).
+    X = ave
+    Y = power
+    Z = vito
+    
+    yes
+
 f. Cucu termuda dari Khelli
+Query:
+    | ?- cucu(X,khelli), \+kakak(X,Y).
+
+    X = patrick ? 
+
+    yes
+
 g. Orang yang menjadi anak kedua dari keluarganya*
+Query:
+    | ?- anak()
+
 h. Orang tua yang memiliki tepat dua anak
+Query:
+    | ?- anak(X,Z), anak(Y,Z), anaksulung(X), anakbungsu(Y), kakak(X,Y).
+
+    X = vanRossum
+    Y = vito
+    Z = gede ? ;
+
+    X = vanRossum
+    Y = vito
+    Z = indah ? ;
+
+    X = ave
+    Y = power
+    Z = gojo ? ;
+
+    X = ave
+    Y = power
+    Z = lovelace ? ;
+
+    X = elonMusk
+    Y = patrick
+    Z = ave ? ;
+
+    X = elonMusk
+    Y = patrick
+    Z = aqua ? 
+
+    yes
+
 i. Orang yang punya mertua
+Query:
+    | ?- menikah(Z,Y), anak(Y,X), anak(Y,W), pria(X), wanita(W).
+
+    W = lovelace
+    X = gojo
+    Y = power
+    Z = vito ? ;
+
+    W = indah
+    X = gede
+    Y = vito
+    Z = power ? ;
+
+    W = khelli
+    X = vonNeumann
+    Y = aqua
+    Z = ave ? ;
+
+    W = lovelace
+    X = gojo
+    Y = ave
+    Z = aqua ? ;
+
+    W = power
+    X = vito
+    Y = wesly
+    Z = wulandari ? 
+
+    yes
+
 j. Wanita yang punya lebih dari 1 anak
+Query:
+    | ?- anak(X,Z), anak(Y,Z), anakbungsu(X), anaksulung(Y), X\=Y, wanita(Z).
+
+    X = vito
+    Y = vanRossum
+    Z = indah ? ;
+
+    X = power
+    Y = ave
+    Z = lovelace ? ;
+
+    X = patrick
+    Y = elonMusk
+    Z = aqua ? 
+
+    yes
+    
+
 k. Orang yang belum pernah melahirkan ketika berusia di atas 20 tahun
+Query:
+    | ?- anak(X,Y), wanita(Y), usia(X,UsiaAnak), usia(Y,UsiaIbu), U is UsiaIbu-UsiaAnak, U<21.
+
+    U = 20
+    UsiaAnak = 4
+    UsiaIbu = 24
+    X = anya
+    Y = wulandari ? 
+
+    yes
+
 l. Keturunan dari Gede yang umurnya tidak lebih kecil dari 25 tahun
+Query:
+    | ?- keturunan(X,gede), usia(X,U), U>24.
+
+    U = 65
+    X = vanRossum ? ;
+
+    U = 60
+    X = bambang ? ;
+
+    U = 56
+    X = vito ? ;
+
+    U = 26
+    X = wesly ? 
+
+    yes
