@@ -1,27 +1,26 @@
+// NIM              : 13521024
+// Nama             : Ahmad Nadil
+// Tanggal          : 3 November 2022
+// Topik praktikum  : ADT Linked List
+// Deskripsi        : File "pemainterakhir.c"
+
 #include <stdio.h>
-#include "list_circular.c"
+#include "list_circular.h"
 
 int main(){
-    // variable initialization
     int i,N,K;
-    scanf("%d",&N);
-    scanf("%d",&K);
-
+    scanf("%d %d",&N, &K);
     List l;
     CreateList(&l);
-
     for (i = 1 ; i <= N ; i++){
         insertLast(&l,i);
     }
-    
-    boolean endGame = false;
     Address loc;
-    Address temp;
-    int val;
-    int pop;
-    int tempo = 0;
-    while(!endGame){
-        tempo++;        int val = K;
+    int val, pop;
+    int temp = 0;
+    while(temp < N){
+        temp++;        
+        int val = K;
         loc = FIRST(l);
         while (val > 1){
             loc = NEXT(loc);
@@ -30,16 +29,12 @@ int main(){
         pop = INFO(loc);
         FIRST(l) = loc;
         deleteFirst(&l,&val);
-        if (tempo != N){
+        if (temp != N){
             printf("%d\n",pop);
         }
         else{
             printf("Pemenang %d\n",pop);
         }
-        if (NEXT(loc) == NULL || isEmpty(l)){
-            endGame = true;
-        }
     }
-
     return 0;
 }
