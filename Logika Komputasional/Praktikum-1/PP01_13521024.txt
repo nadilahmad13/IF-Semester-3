@@ -25,7 +25,7 @@ Query:
 
 d. Paman atau bibi tertua dari Wesly (pilih yang tertua)
 Query:
-    | ?- anak(wesly,X), kakak(Y,X).
+    | ?- anak(wesly,X), kakak(Y,X), anaksulung(Y).
 
     X = vito
     Y = vanRossum ? 
@@ -51,37 +51,12 @@ Query:
 
 g. Orang yang menjadi anak kedua dari keluarganya*
 Query:
-    | ?- anak()
+    | ?- saudara(X,Y),anaksulung(X),anakbungsu(Y),saudara(X,Z),\+anaksulung(Z),\+anakbungsu(Z),usia(X,A),usia(Y,B),usia(Z,C),C>B,C<A.
 
 h. Orang tua yang memiliki tepat dua anak
 Query:
     | ?- anak(X,Z), anak(Y,Z), anaksulung(X), anakbungsu(Y), kakak(X,Y).
 
-    X = vanRossum
-    Y = vito
-    Z = gede ? ;
-
-    X = vanRossum
-    Y = vito
-    Z = indah ? ;
-
-    X = ave
-    Y = power
-    Z = gojo ? ;
-
-    X = ave
-    Y = power
-    Z = lovelace ? ;
-
-    X = elonMusk
-    Y = patrick
-    Z = ave ? ;
-
-    X = elonMusk
-    Y = patrick
-    Z = aqua ? 
-
-    yes
 
 i. Orang yang punya mertua
 Query:
@@ -160,5 +135,40 @@ Query:
 
     U = 26
     X = wesly ? 
+
+    yes
+
+BAGIAN II: Rekursivitas   
+1. combination(N,C,X)
+Query:
+    | ?- combination(20,4,X).
+
+    X = 4845.0 ? 
+
+    yes
+
+2. change(X,Y)
+Query:
+    | ?- change(X,23).
+
+    X = 6 ? 
+
+    yes
+
+    Penjelasan : 23 = 5 + 5 + 5 + 5 + 2 + 1 (6 pecahan)
+
+3. fpb(A,B,X)
+Query:
+    | ?- fpb(45,36,X).
+
+    X = 9 ? 
+
+    yes
+
+4. mod(A,B,X)
+Query:
+    | ?- mod(110,27,X).
+
+    X = 2 ? 
 
     yes
