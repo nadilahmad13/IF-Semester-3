@@ -339,11 +339,32 @@ yes
 no
 
 */
-% swap([X|Xs], 1, 1, [X|Xs]).
-% swap([X|Xs], 1, Y, [X1|Xs]) :-
-%     Y > 1,
-%     getIndex(Xs, X1, Y).
-% swap([X|Xs], Z, Y, [X1|Xs]) :-
+
+swap([X|Xs], 1, 1, [X|Xs]).
+swap([X|Xs], 1, Y, [X1|Xs]) :-
+    Y > 1,
+    getIndex(Xs, X1, Y).
+swap([X|Xs], Z, Y, [X1|Xs]) :-
+    Z > 1,
+    Z1 is Z - 1,
+    swap(Xs, Z1, Y, Xs1),
+    getIndex(Xs1, X1, Y).
+
+
+/*
+3. Split List
+Memisahkan List yang di-input menjadi dua buah List berdasarkan nilai elemennya dengan aturan ganjil-genap. 
+Asumsikan terdapat paling tidak ada satu elemen pada List. 
+*/
+
+splitList([], [], []).
+splitList([X|Xs], [X|Ys], Zs) :-
+    mod(X, 2, 1),
+    splitList(Xs, Ys, Zs).
+
+splitList([X|Xs], Ys, [X|Zs]) :-
+    mod(X, 2, 0),
+    splitList(Xs, Ys, Zs).
 
 /*
 BONUS
