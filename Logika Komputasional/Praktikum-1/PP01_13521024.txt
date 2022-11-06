@@ -51,12 +51,54 @@ Query:
 
 g. Orang yang menjadi anak kedua dari keluarganya*
 Query:
-    | ?- saudara(X,Y),anaksulung(X),anakbungsu(Y),saudara(X,Z),\+anaksulung(Z),\+anakbungsu(Z),usia(X,A),usia(Y,B),usia(Z,C),C>B,C<A.
+    | ?- anak(Z,Y), pria(Y), kakak(X,Z), anaksulung(X), usia(Z,A), \+(kakak(X,W), usia(W,B),B>A).
+
+    A = 60
+    X = vanRossum
+    Y = gede
+    Z = bambang ? ;
+
+    A = 50
+    X = ave
+    Y = gojo
+    Z = power ? ;
+
+    A = 24
+    X = elonMusk
+    Y = ave
+    Z = patrick ? 
+
+    yes
 
 h. Orang tua yang memiliki tepat dua anak
 Query:
-    | ?- anak(X,Z), anak(Y,Z), anaksulung(X), anakbungsu(Y), kakak(X,Y).
+    | ?- orangtua(Z,Y), saudara(X,Y), anaksulung(X), anakbungsu(Y), \+ (anak(Y,Z), wanita(Z), kakak(X,Y), anaksulung(X), usia(Y,A), kakak(X,W), usia(W,B), B<A).
 
+    X = vanRossum
+    Y = vito
+    Z = gede ? ;
+
+    X = vanRossum
+    Y = vito
+    Z = indah ? ;
+
+    X = ave
+    Y = power
+    Z = gojo ? ;
+
+    X = ave
+    Y = power
+    Z = lovelace ? ;
+
+    X = elonMusk
+    Y = patrick
+    Z = ave ? ;
+
+    X = elonMusk
+    Y = patrick
+    Z = aqua ? 
+
+    yes
 
 i. Orang yang punya mertua
 Query:
@@ -175,6 +217,11 @@ Query:
 
 5. deret(X,Y)
 Query:
+    | ?- deret(5, Y).
+
+    Y = 10 ? 
+
+    yes
 
 BAGIAN III : List
 A. Statistik List

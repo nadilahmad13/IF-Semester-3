@@ -237,21 +237,20 @@ mod(A, B, X) :-
 5. deret(X,Y)
 Diberikan sebuah deret berikut: 1,2,4,5,10,....,dst.
 X adalahsuku ke-N dari deret berikut dan Y adalah nilai suku ke-N tersebut.
-
-
-Contoh:
-| ?- deret(6, Y).
-Y = 11 ?
-yes
-
-? - deret(7, Y).
-Y = 22 ?
-yes
+ASUMSI : deret setelahnya : 1,2,4,5,10,11,22,23,46,47,94,......,dst.
 */
 
-% deret(1, 1).
-% deret(2, 2).
-% deret(X, Y) :-
+deret(1,1):-!.
+deret(X,Y):- 
+    mod(X,2,1),
+    X1 is X-1,
+    deret(X1,Y1),
+    Y is Y1*2.
+deret(X,Y):- 
+    mod(X,2,0),
+    X1 is X-1,
+    deret(X1,Y1),
+    Y is Y1+1.
 
 /* BAGIAN III: List */
 /*
@@ -320,24 +319,6 @@ getIndex([_|Xs], Y, Z) :-
 Menukar dua buah elemen pada indeks tertentu dan mengembalikan List yang sudah diperbarui nilainya. 
 Nilai indeks masukan diasumsikan selalu positif.  
 Index dimulai dari 1.
-
-Contoh:
-| ?- swap([5,6,7,8], 1, 1, Result).
-
-Result = [5,6,7,8]
-
-yes
-
-| ?- swap([5,6,7,8], 4, 2, Result).
-
-Result = [5,8,7,6]
-
-yes
-
-| ?- swap([5,6,7,8,9], 4, 6, Result).
-
-no
-
 */
 
 replace([OldElement|Rest],[NewElement|Rest],Index,OldElement,NewElement) :- Index == 0, !.
@@ -387,11 +368,14 @@ Diperbolehkan menggunakan fungsi I/O untuk merapikan dan memperindah output.
 Perhatikan bahwa setiap aksi pada kalkulator, kecuali startCalculator dan getValue, mengeluarkan nilai lama yang disimpan kalkulator dan nilai yang baru.
 */
 
+%savedValue initialization
+:- dynamic(savedValue/1).
+
 % startCalculator and initialized value to 0
 startCalculator :-
     asserta(savedValue(0)),
-    write('Selamat Datang di Kalkulator Prolog!'), nl,
-    write('Currently Saved Value is 0'), nl.
+    print('Selamat Datang di Kalkulator Prolog!'), nl,
+    print('Currently Saved Value is 0'), nl.
 
 % add X to savedValue
 add(X) :-
@@ -399,8 +383,8 @@ add(X) :-
     Z is Y + X,
     retract(savedValue(Y)),
     asserta(savedValue(Z)),
-    write('Old Saved Value is '), write(Y), nl,
-    write('New Saved Value is '), write(Z), nl.
+    print('Old Saved Value is '), print(Y), nl,
+    print('New Saved Value is '), print(Z), nl.
 
 % subtract X from savedValue
 subtract(X) :-
@@ -408,8 +392,8 @@ subtract(X) :-
     Z is Y - X,
     retract(savedValue(Y)),
     asserta(savedValue(Z)),
-    write('Old Saved Value is '), write(Y), nl,
-    write('New Saved Value is '), write(Z), nl.
+    print('Old Saved Value is '), print(Y), nl,
+    print('New Saved Value is '), print(Z), nl.
 
 % multiply savedValue with X
 multiply(X) :-
@@ -417,8 +401,8 @@ multiply(X) :-
     Z is Y * X,
     retract(savedValue(Y)),
     asserta(savedValue(Z)),
-    write('Old Saved Value is '), write(Y), nl,
-    write('New Saved Value is '), write(Z), nl.
+    print('Old Saved Value is '), print(Y), nl,
+    print('New Saved Value is '), print(Z), nl.
 
 % divide savedValue with X
 divide(X) :-
@@ -426,23 +410,23 @@ divide(X) :-
     Z is Y / X,
     retract(savedValue(Y)),
     asserta(savedValue(Z)),
-    write('Old Saved Value is '), write(Y), nl,
-    write('New Saved Value is '), write(Z), nl.
+    print('Old Saved Value is '), print(Y), nl,
+    print('New Saved Value is '), print(Z), nl.
 
 % get savedValue
 getValue :-
     savedValue(Y),
-    write('Currently Saved Value is '), write(Y), nl.
+    print('Currently Saved Value is '), print(Y), nl.
 
 % clear savedValue
 clearCalculator :-
     savedValue(Y),
     retract(savedValue(Y)),
     asserta(savedValue(0)),
-    write('Old Saved Value is '), write(Y), nl,
-    write('New Saved Value is 0'), nl.
+    print('Old Saved Value is '), print(Y), nl,
+    print('New Saved Value is 0'), nl.
 
 % exit calculator
 exitCalculator :-
-    write('Terima Kasih telah Menggunakan Kalkulator Prolog'), nl,
-    retractall(savedValue(_)).
+    print('Terima Kasih telah Menggunakan Kalkulator Prolog'), nl,
+    retract(savedValue(_)).
