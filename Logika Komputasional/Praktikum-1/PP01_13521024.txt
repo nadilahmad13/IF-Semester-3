@@ -43,7 +43,7 @@ Query:
 
 f. Cucu termuda dari Khelli
 Query:
-    | ?- cucu(X,khelli), \+kakak(X,Y).
+    | ?- cucu(X,khelli), anakbungsu(X).
 
     X = patrick ? 
 

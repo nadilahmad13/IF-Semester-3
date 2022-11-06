@@ -1,3 +1,9 @@
+/* 
+NAMA     : Ahmad Nadil
+NIM      : 13521024
+KELAS    : K-03
+*/
+
 /* BAGIAN I: Fakta, Rule, dan Query */
 /* Deklarasi Fakta */
 /* pria(X) : X adalah pria */
