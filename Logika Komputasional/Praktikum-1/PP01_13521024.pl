@@ -340,16 +340,17 @@ no
 
 */
 
-swap([X|Xs], 1, 1, [X|Xs]).
-swap([X|Xs], 1, Y, [X1|Xs]) :-
-    Y > 1,
-    getIndex(Xs, X1, Y).
-swap([X|Xs], Z, Y, [X1|Xs]) :-
-    Z > 1,
-    Z1 is Z - 1,
-    swap(Xs, Z1, Y, Xs1),
-    getIndex(Xs1, X1, Y).
+replace([OldElement|Rest],[NewElement|Rest],Index,OldElement,NewElement) :- Index == 0, !.
+replace([First|Rest],[First|NewRest],Index,OldElement,NewElement) :- 
+    Index > 0,
+    NewIndex is Index - 1, 
+    replace(Rest,NewRest,NewIndex,OldElement,NewElement).
 
+swap(OldList, I, J, NewList) :-
+    A is I - 1,
+    B is J - 1,
+    replace(OldList, List, A, X, Y),
+    replace(List, NewList, B, Y, X).
 
 /*
 3. Split List

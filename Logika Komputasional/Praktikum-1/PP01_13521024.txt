@@ -239,7 +239,20 @@ Query:
 
 2. swap(List, Index1, Index2, Result)
 Query:
+    | ?- swap([5,6,7,8], 1, 1, Result).
 
+    Result = [5,6,7,8]
+
+    yes
+    | ?- swap([5,6,7,8], 4, 2, Result).
+
+    Result = [5,8,7,6]
+
+    yes
+    | ?- swap([5,6,7,8,9], 4, 6, Result).
+
+    no
+    
 3. splitList(ListAwal, ListGanjil, ListGenap)
 Query:
 
