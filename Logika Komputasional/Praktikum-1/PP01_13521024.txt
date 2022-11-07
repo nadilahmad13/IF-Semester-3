@@ -51,8 +51,7 @@ Query:
 
 g. Orang yang menjadi anak kedua dari keluarganya*
 Query:
-    | ?- anak(Z,Y), pria(Y), kakak(X,Z), anaksulung(X), usia(Z,A), \+(kakak(X,W), usia(W,B),B>A).
-
+    | ?- anak(Z,Y), pria(Y), kakak(X,Z), anaksulung(X), usia(Z,A), \+ (kakak(X,W),usia(W,B),B>A).
     A = 60
     X = vanRossum
     Y = gede
