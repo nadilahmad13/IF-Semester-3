@@ -53,7 +53,7 @@ int main(){
             dequeue(&IDX,&temp);
         }
         else if (HEAD(S) != HEAD(M)){
-            if (headIDXChecked){
+            if (headIDXChecked && HEAD(IDX) == 1){
                 stop = true;
             }
             else if (HEAD(IDX) == 1){
