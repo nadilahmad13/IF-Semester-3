@@ -45,6 +45,7 @@ function SearchX (L: List, X: infotype)-> boolean
 
 { ALGORITMA }
     p <- First(L)
+    found <- false
     while (p != Nil) and (not found) do
         if (Info(p) = X) then
             found <- true

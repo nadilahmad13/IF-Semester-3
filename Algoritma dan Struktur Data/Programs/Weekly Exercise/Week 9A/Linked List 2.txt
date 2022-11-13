@@ -21,7 +21,7 @@ var
     while (p != NIL) do
         if (p^.info < 0) then
             idxNeg <- indexOf(l, p^.info)
-            deleteAt(l,idx,val)
+            deleteAt(l,idxNeg,val)
         p <- p^.next
 
 { ALTERNATIF 2 }
@@ -82,7 +82,7 @@ procedure updateList(input x,y : infotype, input/output l : list)
 {Menerima sebuah infotype x dan y dan sebuah list l dan kemudian mengganti elemen pertama l
 yang bernilai x dengan y jika x ada di l.}
 
-{ KAMUS LOKAL }
+{ KAMUS LOKAL }``
    p : address
    flag : boolean
 
