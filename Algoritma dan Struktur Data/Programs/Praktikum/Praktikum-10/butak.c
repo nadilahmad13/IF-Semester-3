@@ -1,69 +1,77 @@
+// NIM              : 13521024
+// Nama             : Ahmad Nadil
+// Tanggal          : 17 November 2022
+// Topik praktikum  : Queue dan Stack dengan struktur berkait
+// Deskripsi        : File "butak.c"
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "queuelinked.c"
-#include "charmachine.c"
+#include "queuelinked.h"
+#include "charmachine.h"
+
+boolean isElHomogen(Queue q){
+    Address P = ADDR_HEAD(q);
+    int x = INFO(P); 
+    while (P != NULL) {
+        if (INFO(P) != x) {
+            return false;
+        }
+        P = NEXT(P);
+    }
+    return true;
+}
 
 int main(){
-    Queue S;
-    Queue M;
-    Queue IDX;
-    CreateQueue(&S);
-    CreateQueue(&M);
-    CreateQueue(&IDX);
+    Queue qSandwich;
+    Queue qMahasiswa;
+    Queue nomorMahasiswa;
+    CreateQueue(&qSandwich);
+    CreateQueue(&qMahasiswa);
+    CreateQueue(&nomorMahasiswa);
     boolean koma = false;
-    int temp;
-    int i;
     START();
-    while(!EOP){
-        if(currentChar == 'B' && !koma){
-            enqueue(&M,0);
+    int count = 0;
+    while (currentChar != ',') {
+        if (currentChar == 'B') {
+            enqueue(&qMahasiswa, 0);
+        } 
+        else if (currentChar == 'K') {
+            enqueue(&qMahasiswa, 1);
         }
-        else if (currentChar == 'K' && !koma){
-            enqueue(&M,1);
+        count++;
+        enqueue(&nomorMahasiswa, count);
+        ADV();
+    }
+    ADV();
+    while (!EOP) {
+        if (currentChar == 'B') {
+            enqueue(&qSandwich, 0);
         }
-        else if (currentChar == ','){
-            koma = true;
-        }
-        else if(currentChar == 'B'){
-            enqueue(&S,0);
-        }
-        else if (currentChar == 'K'){
-            enqueue(&S,1);
+        else if (currentChar == 'K') {
+            enqueue(&qSandwich, 1);
         }
         ADV();
     }
-    for (i = 0 ; i < length(M) ; i++){
-        enqueue(&IDX,i+1);
-    }
-
-    boolean headIDXChecked = false;
-    boolean stop = false;
-
-    while(!isEmpty(S) && !isEmpty(M) && !stop){
-        if (HEAD(S) == HEAD(M)){
-            dequeue(&S,&temp);
-            dequeue(&M,&temp);
-            printf("%d -> ",HEAD(IDX));
-            if(temp == 0){
-                printf("bulat\n");
+    int i,temp,shape;
+    while (!isEmpty(qSandwich) && !(isElHomogen(qMahasiswa) && HEAD(qMahasiswa) != HEAD(qSandwich))) {
+        if (HEAD(qMahasiswa) == HEAD(qSandwich)){
+            dequeue(&qMahasiswa,&shape);
+            dequeue(&qSandwich,&shape);
+            dequeue(&nomorMahasiswa,&temp);
+            if (shape == 0){
+                printf("%d -> bulat\n",temp);
             }
-            else if (temp == 1){
-                printf("kotak\n");
+            else{
+                printf("%d -> kotak\n",temp);
             }
-            dequeue(&IDX,&temp);
         }
-        else if (HEAD(S) != HEAD(M)){
-            if (headIDXChecked && HEAD(IDX) == 1){
-                stop = true;
-            }
-            else if (HEAD(IDX) == 1){
-                headIDXChecked = true;
-            }
-            dequeue(&M,&temp);
-            enqueue(&M,temp);
-            enqueue(&IDX,HEAD(IDX));
-            dequeue(&IDX,&temp);
+        else{
+            dequeue(&qMahasiswa,&shape);
+            enqueue(&qMahasiswa,shape);
+            dequeue(&nomorMahasiswa,&temp);
+            enqueue(&nomorMahasiswa,temp);
         }
     }
-    printf("%d\n",length(M));
+    printf("%d\n",length(qSandwich));
+    return 0;
 }
