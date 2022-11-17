@@ -12,7 +12,7 @@ void Holoro(input)
     i = 1;
     while(true){
         if (i & 1){
-            if (num_arr[i+1] != i * num_arr[i] + 1) goto FLAG;
+            if (num_arr[i+1] != i * num_arr[i]) goto FLAG;
         }
         else if (num_arr[i+1] != i + num_arr[i]){
     FLAG:
