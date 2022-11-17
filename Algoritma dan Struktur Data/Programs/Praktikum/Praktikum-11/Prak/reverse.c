@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "listrec.h"
+#include "listrec.c"
 
 void displayLinear(List l);
 List inputList (List l, int length);
 List elementsBeforeX(List l, ElType x);
-List inverseList (List l);
+List InvList (List l);
 
-List inverseList (List l)
+List InvList (List l)
 /* Mengirimkan list baru, hasil invers dari l dengan menyalin semua elemen list.
 Semua elemen list baru harus dialokasi */
 /* Jika alokasi gagal, hasilnya list kosong */
@@ -19,7 +19,7 @@ Semua elemen list baru harus dialokasi */
         return l;
     }
     else{
-        return konsb(inverseList(tail(l)),head(l));
+        return konsb(InvList(tail(l)),head(l));
     }
 }
 
@@ -63,8 +63,8 @@ int main(){
     scanf("%d",&index);
     l1 = inputList(l1,n);
     l2 = elementsBeforeX(l1,index);
-    l2 = inverseList(l2);
-    l1 = inverseList(l1);
+    l2 = InvList(l2);
+    l1 = InvList(l1);
     l1 = elementsBeforeX(l1,n-index);
 
     l3 = concat(l2,l1);
