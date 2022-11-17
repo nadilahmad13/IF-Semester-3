@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "listrec.c"
+#include "listrec.h"
 
 void displayLinear(List l);
 List inputList (List l, int length);
@@ -24,8 +24,8 @@ Semua elemen list baru harus dialokasi */
 }
 
 void displayLinear(List l){
-    if (isEmpty(l)){
-        printf("\n");
+    if (isOneElmt(l)){
+        printf("%d\n",head(l));
     }
     else{
         printf("%d ",head(l));
