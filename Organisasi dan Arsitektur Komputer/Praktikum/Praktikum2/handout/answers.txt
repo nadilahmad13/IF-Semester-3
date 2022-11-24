@@ -1,0 +1,7 @@
+Welcome to Holo Number 5.
+1 2 4 7 28 33
+0 -356
+60 3 Say!Fanfare!
+4 116
+2 4 1 5 3 6
+743
