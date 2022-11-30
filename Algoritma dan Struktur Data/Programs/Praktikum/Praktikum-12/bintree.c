@@ -195,3 +195,45 @@ Note: Anda boleh membuat fungsi tambahan untuk membuat implementasi fungsi ini j
 {
     recursivePrintTree(p, h, 0);
 }
+
+/* ROB 1 */
+int rob1(BinTree t)
+{
+    if (t == NULL) {
+        return 0;
+    }
+    int left  = rob1(LEFT(t));
+    int right = rob1(RIGHT(t));
+    return (left > right ? left : right) + ROOT(t); 
+}
+
+/* ROB 2 */
+int rob2(BinTree T){
+    if (isTreeEmpty(T)) {
+        return 0;
+    } 
+    else if (isOneElmt(T)) {
+        return ROOT(T);
+    } 
+    else if (!isTreeEmpty(T)) {
+        int n1, n2;
+        if (isUnerLeft(T)) {
+            n1 = ROOT(T) + rob2(LEFT(LEFT(T))) + rob2(RIGHT(LEFT(T)));
+            n2 = rob2(LEFT(T));
+        } 
+        else if (isUnerRight(T)) {
+            n1 = ROOT(T) + rob2(LEFT(RIGHT(T))) + rob2(RIGHT(RIGHT(T)));
+            n2 = rob2(RIGHT(T));
+        } 
+        else {
+            n1 = ROOT(T) + rob2(LEFT(LEFT(T))) + rob2(RIGHT(LEFT(T))) + rob2(LEFT(RIGHT(T))) + rob2(RIGHT(RIGHT(T)));
+            n2 = rob2(LEFT(T)) + rob2(RIGHT(T));
+        }
+        if (n1 > n2) {
+            return n1;
+        } 
+        else {
+            return n2;
+        }
+    }
+}

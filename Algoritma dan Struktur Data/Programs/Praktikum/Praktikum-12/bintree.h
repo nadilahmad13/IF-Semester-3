@@ -117,4 +117,11 @@ A
     E
 Note: Anda boleh membuat fungsi tambahan untuk membuat implementasi fungsi ini jika diperlukan
 */
+
+/* ROB 1 */
+int rob1(BinTree T);
+
+/* ROB 2 */
+int rob2(BinTree T);
+
 #endif
