@@ -56,3 +56,15 @@ function isEqual(l1,l2:List) -> boolean
                 -> isEqual(l1^.tail, l2^.tail)
             else
                 -> false
+
+procedure listPlus(l1,l2:List ; output l3:List)
+{ Menghasilkan l3 yang merupakan hasil penjumlahan l1 dan l2. l1 dan l2 harus memiliki panjang yang sama. }
+    
+{ KAMUS LOKAL }
+
+{ ALGORITMA }
+    if (isEmpty(l1) and isEmpty(l2)) then
+        -> l3 = Nil
+    else
+        l3^.head = l1^.head + l2^.head
+        l3^.tail = listPlus(l1^.tail, l2^.tail)
