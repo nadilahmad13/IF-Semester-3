@@ -173,17 +173,17 @@ procedure addDaun (input/Output P: BinTree, input X, Y: ElType, input Kiri: bool
         else if isOneElmt(P) then
             if (P^.info = X) then
                 if (Kiri) then
-                    P^.left = newTreeNode(Y)
+                    P^.left <- newTreeNode(Y)
                 else
-                    P^.right = newTreeNode(Y)
+                    P^.right <- newTreeNode(Y)
             else
                 { do nothing }
         else
             if (P^.info = X) then
                 if (Kiri) then
-                    P^.left = newTreeNode(Y)
+                    P^.left <- newTreeNode(Y)
                 else
-                    P^.right = newTreeNode(Y)
+                    P^.right <- newTreeNode(Y)
             else
                 addDaun(P^.left, X, Y, Kiri)
                 addDaun(P^.right, X, Y, Kiri)
